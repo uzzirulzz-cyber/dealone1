@@ -13,6 +13,7 @@ import {
   X,
   ChevronDown,
   Briefcase,
+  BookOpen,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -33,6 +34,7 @@ import { cn } from '@/lib/utils';
 const navItems: { label: string; view: ViewName }[] = [
   { label: 'Home', view: 'home' },
   { label: 'Marketplace', view: 'marketplace' },
+  { label: 'Blog', view: 'blog-index' },
   { label: 'My Dashboard', view: 'user-dashboard' },
 ];
 
@@ -137,7 +139,7 @@ export function Navbar() {
                 onClick={() => go(item.view)}
                 className={cn(
                   'text-sm font-medium hover:text-emerald-400 hover:bg-zinc-900',
-                  currentView === item.view
+                  currentView === item.view || (currentView === 'blog-post' && item.view === 'blog-index') || (currentView === 'blog-features' && item.view === 'blog-index')
                     ? 'text-emerald-400 bg-zinc-900'
                     : 'text-zinc-300',
                 )}
@@ -307,7 +309,7 @@ export function Navbar() {
                 onClick={() => go(item.view)}
                 className={cn(
                   'block w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium',
-                  currentView === item.view
+                  currentView === item.view || (currentView === 'blog-post' && item.view === 'blog-index') || (currentView === 'blog-features' && item.view === 'blog-index')
                     ? 'bg-zinc-900 text-emerald-400'
                     : 'text-zinc-300 hover:bg-zinc-900',
                 )}

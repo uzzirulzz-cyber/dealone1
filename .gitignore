@@ -68,3 +68,5 @@ server.log
 
 # OS files
 Thumbs.db
+# User-uploaded files (chat attachments)
+/upload/

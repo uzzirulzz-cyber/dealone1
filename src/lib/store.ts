@@ -25,8 +25,10 @@ interface MarketplaceState {
   // navigation
   currentView: ViewName;
   selectedBusinessId: string | null;
+  selectedBlogSlug: string | null;
   setView: (view: ViewName) => void;
   openBusiness: (id: string) => void;
+  openBlogPost: (slug: string) => void;
 
   // user
   currentUser: User;
@@ -76,8 +78,10 @@ export const useMarketplace = create<MarketplaceState>()(
     (set, get) => ({
       currentView: 'home',
       selectedBusinessId: null,
+      selectedBlogSlug: null,
       setView: (view) => set({ currentView: view, selectedBusinessId: view === 'business-detail' ? get().selectedBusinessId : null }),
       openBusiness: (id) => set({ selectedBusinessId: id, currentView: 'business-detail' }),
+      openBlogPost: (slug) => set({ selectedBlogSlug: slug, currentView: 'blog-post' }),
 
       currentUser: initialUsers[0],
       users: initialUsers,
@@ -93,7 +97,7 @@ export const useMarketplace = create<MarketplaceState>()(
 
       businesses: initialBusinesses,
       cart: [],
-      wishlist: ['biz-2'],
+      wishlist: ['biz-13'],
       orders: initialOrders,
       offers: initialOffers,
       adminSettings: initialAdminSettings,
@@ -246,7 +250,7 @@ export const useMarketplace = create<MarketplaceState>()(
         })),
     }),
     {
-      name: 'bizexchange-storage-v3',
+      name: 'bizexchange-storage-v4',
       partialize: (s) => ({
         currentUser: s.currentUser,
         businesses: s.businesses,

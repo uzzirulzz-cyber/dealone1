@@ -15,14 +15,17 @@ import {
   DollarSign,
   LineChart,
   Building2,
+  BookOpen,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
 import { BusinessCard } from '@/components/marketplace/BusinessCard';
 import { OfferModal } from '@/components/marketplace/OfferModal';
 import { useMarketplace } from '@/lib/store';
 import { formatCurrency } from '@/lib/format';
+import { SEO_BUSINESSES } from '@/lib/seo';
 import type { BusinessListing } from '@/lib/types';
 
 const stats = [
@@ -60,7 +63,7 @@ const trustFeatures = [
 ];
 
 export function HomeView() {
-  const { businesses, setView } = useMarketplace();
+  const { businesses, setView, openBlogPost } = useMarketplace();
   const [selectedForOffer, setSelectedForOffer] = useState<BusinessListing | null>(null);
   const [search, setSearch] = useState('');
 
@@ -256,6 +259,67 @@ export function HomeView() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Blog teaser */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
+          <div>
+            <Badge className="bg-emerald-900/30 border-emerald-700/40 text-emerald-300 mb-3">
+              <BookOpen className="w-3 h-3 mr-1" /> Acquisition Blog
+            </Badge>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
+              Deep-Dive Analyses of Every Listing
+            </h2>
+            <p className="text-sm text-zinc-400 mt-2 max-w-2xl">
+              Each business on BizExchange comes with a long-form article breaking down the
+              platform, the verified metrics, the reasons to acquire, and a due diligence
+              checklist — written for serious buyers.
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            onClick={() => setView('blog-index')}
+            className="bg-transparent border-zinc-700 text-zinc-200 hover:bg-zinc-900 hover:text-emerald-400"
+          >
+            View All Articles
+            <ArrowRight className="w-4 h-4 ml-1.5" />
+          </Button>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {SEO_BUSINESSES.slice(0, 3).map((post) => (
+            <Card
+              key={post.id}
+              className="bg-zinc-900 border-zinc-800 overflow-hidden cursor-pointer hover:border-emerald-700/60 transition group flex flex-col"
+              onClick={() => openBlogPost(post.blogSlug)}
+            >
+              <div className="relative aspect-[16/10] overflow-hidden bg-zinc-800">
+                <img
+                  src={post.screenshot}
+                  alt={post.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <Badge className="absolute top-3 left-3 bg-zinc-950/90 text-emerald-400 border-emerald-800/50 backdrop-blur-md text-[10px]">
+                  {post.category}
+                </Badge>
+              </div>
+              <div className="p-5 flex-1 flex flex-col">
+                <h3 className="text-base font-bold text-white leading-snug mb-2 group-hover:text-emerald-400 transition line-clamp-3">
+                  {post.blogTitle}
+                </h3>
+                <p className="text-xs text-zinc-400 line-clamp-2 mb-3">
+                  {post.blogExcerpt}
+                </p>
+                <div className="mt-auto pt-3 border-t border-zinc-800 flex items-center justify-between text-[11px] text-zinc-500">
+                  <span>8 min read</span>
+                  <span className="text-emerald-400 font-bold">
+                    {formatCurrency(post.askingPrice)}
+                  </span>
+                </div>
+              </div>
+            </Card>
+          ))}
         </div>
       </section>
 

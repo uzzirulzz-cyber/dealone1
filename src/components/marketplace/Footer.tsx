@@ -12,7 +12,7 @@ export function Footer() {
   return (
     <footer className="mt-auto bg-zinc-950 border-t border-zinc-800 text-zinc-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-10">
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
@@ -75,6 +75,35 @@ export function Footer() {
               <li>
                 <button onClick={() => go('marketplace')} className="hover:text-emerald-400 transition">
                   Agencies
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Blog */}
+          <div>
+            <h4 className="text-xs font-bold uppercase tracking-wider text-white mb-4">
+              Blog & Resources
+            </h4>
+            <ul className="space-y-2.5 text-sm">
+              <li>
+                <button onClick={() => go('blog-index')} className="hover:text-emerald-400 transition">
+                  All Articles
+                </button>
+              </li>
+              <li>
+                <button onClick={() => go('blog-features')} className="hover:text-emerald-400 transition">
+                  Platform Features
+                </button>
+              </li>
+              <li>
+                <button onClick={() => go('blog-index')} className="hover:text-emerald-400 transition">
+                  Acquisition Guides
+                </button>
+              </li>
+              <li>
+                <button onClick={() => go('blog-index')} className="hover:text-emerald-400 transition">
+                  Due Diligence Tips
                 </button>
               </li>
             </ul>

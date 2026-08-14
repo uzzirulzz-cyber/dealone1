@@ -11,18 +11,22 @@ import { CheckoutView } from '@/components/views/CheckoutView';
 import { SellerDashboardView } from '@/components/views/SellerDashboardView';
 import { UserDashboardView } from '@/components/views/UserDashboardView';
 import { AdminDashboardView } from '@/components/views/AdminDashboardView';
+import { BlogIndexView } from '@/components/views/BlogIndexView';
+import { BlogPostView } from '@/components/views/BlogPostView';
+import { FeaturesArticleView } from '@/components/views/FeaturesArticleView';
 import { useMarketplace } from '@/lib/store';
+import { getBlogPostBySlug } from '@/lib/seo';
 import { Toaster } from 'sonner';
 
 export default function Home() {
-  const { currentView } = useMarketplace();
+  const { currentView, setView, openBlogPost, selectedBlogSlug } = useMarketplace();
 
   // Scroll to top on view change
   useEffect(() => {
     if (typeof window !== 'undefined') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-  }, [currentView]);
+  }, [currentView, selectedBlogSlug]);
 
   const renderView = () => {
     switch (currentView) {
@@ -40,13 +44,54 @@ export default function Home() {
         return <SellerDashboardView />;
       case 'admin-dashboard':
         return <AdminDashboardView />;
+      case 'blog-index':
+        return (
+          <BlogIndexView
+            onReadPost={(slug) => openBlogPost(slug)}
+          />
+        );
+      case 'blog-post': {
+        const post = selectedBlogSlug
+          ? getBlogPostBySlug(selectedBlogSlug)
+          : undefined;
+        if (!post) {
+          return (
+            <div className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center p-8 text-center">
+              <h2 className="text-xl font-bold text-white mb-2">Article not found</h2>
+              <button
+                onClick={() => setView('blog-index')}
+                className="text-emerald-400 hover:text-emerald-300"
+              >
+                Back to Blog
+              </button>
+            </div>
+          );
+        }
+        return (
+          <BlogPostView
+            post={post}
+            onBack={() => setView('blog-index')}
+            onReadPost={(slug) => openBlogPost(slug)}
+          />
+        );
+      }
+      case 'blog-features':
+        return (
+          <FeaturesArticleView
+            onBack={() => setView('blog-index')}
+            onReadPost={(slug) => openBlogPost(slug)}
+          />
+        );
       default:
         return <HomeView />;
     }
   };
 
-  // Hide footer on checkout flow for focus
-  const hideFooter = currentView === 'checkout' || currentView === 'business-detail';
+  // Hide footer on checkout and article pages for focus
+  const hideFooter =
+    currentView === 'checkout' ||
+    currentView === 'business-detail' ||
+    currentView === 'blog-post';
 
   return (
     <div className="min-h-screen flex flex-col bg-zinc-950">

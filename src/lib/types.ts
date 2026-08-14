@@ -7,7 +7,10 @@ export type ViewName =
   | 'checkout'
   | 'user-dashboard'
   | 'seller-dashboard'
-  | 'admin-dashboard';
+  | 'admin-dashboard'
+  | 'blog-index'
+  | 'blog-post'
+  | 'blog-features';
 
 export interface User {
   id: string;
