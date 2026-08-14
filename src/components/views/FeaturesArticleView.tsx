@@ -98,21 +98,21 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
   const { setView } = useMarketplace();
 
   return (
-    <article className="bg-zinc-950 min-h-screen">
+    <article className="bg-gray-50 min-h-screen">
       {/* Hero */}
-      <header className="relative bg-gradient-to-b from-zinc-900 to-zinc-950 border-b border-zinc-800 overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-emerald-600/10 blur-[120px] rounded-full pointer-events-none" />
+      <header className="relative bg-gradient-to-b from-[#0B1B3A] via-[#102956] to-[#0B1B3A] border-b border-[#1d3a6e] overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
           <button
             onClick={onBack}
-            className="inline-flex items-center gap-1.5 text-sm text-zinc-400 hover:text-emerald-400 transition mb-6"
+            className="inline-flex items-center gap-1.5 text-sm text-gray-600 hover:text-blue-400 transition mb-6"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Blog
           </button>
 
-          <div className="flex items-center gap-3 text-xs text-zinc-500 mb-4">
-            <Badge className="bg-emerald-900/40 border-emerald-800 text-emerald-400">
+          <div className="flex items-center gap-3 text-xs text-gray-500 mb-4">
+            <Badge className="bg-blue-900/40 border-blue-800 text-blue-400">
               Platform Overview
             </Badge>
             <span className="flex items-center gap-1">
@@ -122,11 +122,11 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
             <span>By {SITE.author}</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.15] mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-gray-900 leading-[1.15] mb-4">
             MakeThisDeal.biz Features — How the Verified Business Marketplace Actually Works
           </h1>
 
-          <p className="text-base sm:text-lg text-zinc-400 leading-relaxed mb-6">
+          <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-6">
             A complete walkthrough of every feature on MakeThisDeal.biz: escrow-protected
             transactions, verified financial listings, structured offer negotiation,
             role-based dashboards, and real live-site screenshots. If you are evaluating
@@ -139,16 +139,16 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14 space-y-12">
         {/* Intro */}
         <section className="space-y-4">
-          <p className="text-base text-zinc-300 leading-relaxed">
-            <strong className="text-white">MakeThisDeal.biz</strong> is a curated marketplace for
+          <p className="text-base text-gray-700 leading-relaxed">
+            <strong className="text-gray-900">MakeThisDeal.biz</strong> is a curated marketplace for
             buying and selling profitable online businesses — SaaS platforms, crypto trading
             terminals, digital product marketplaces, AI CRMs, and luxury real estate platforms.
             Unlike sprawling business-for-sale directories that list thousands of unverified
             deals, MakeThisDeal.biz intentionally keeps its catalog small. As of this writing, the
-            marketplace features <strong className="text-emerald-400">{SEO_BUSINESSES.length} verified businesses</strong>,
+            marketplace features <strong className="text-blue-400">{SEO_BUSINESSES.length} verified businesses</strong>,
             each with real metrics, real screenshots, and a real seller behind it.
           </p>
-          <p className="text-base text-zinc-300 leading-relaxed">
+          <p className="text-base text-gray-700 leading-relaxed">
             This article is the definitive feature walkthrough. Whether you are a buyer
             evaluating your first micro-acquisition, a seller preparing to list a business,
             or an operator considering building a similar platform, every feature below is
@@ -159,24 +159,24 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
 
         {/* Current catalog */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-black text-white flex items-center gap-2">
-            <TrendingUp className="w-6 h-6 text-emerald-400" />
+          <h2 className="text-2xl font-black text-gray-900 flex items-center gap-2">
+            <TrendingUp className="w-6 h-6 text-blue-400" />
             The Current Catalog — {SEO_BUSINESSES.length} Verified Businesses
           </h2>
-          <p className="text-base text-zinc-300 leading-relaxed">
+          <p className="text-base text-gray-700 leading-relaxed">
             MakeThisDeal.biz currently lists {SEO_BUSINESSES.length} businesses for sale. Every
             listing was sourced from a real production website, captured with a live
             screenshot, and verified for the metrics disclosed below. Asking prices range
             from {formatCurrency(Math.min(...SEO_BUSINESSES.map((b) => b.askingPrice)))} to{' '}
             {formatCurrency(Math.max(...SEO_BUSINESSES.map((b) => b.askingPrice)))}.
           </p>
-          <Card className="bg-zinc-900 border-zinc-800 overflow-hidden">
-            <div className="divide-y divide-zinc-800">
+          <Card className="bg-white border-gray-200 overflow-hidden">
+            <div className="divide-y divide-gray-200">
               {SEO_BUSINESSES.map((b, i) => (
                 <button
                   key={b.id}
                   onClick={() => onReadPost(b.blogSlug)}
-                  className="w-full text-left p-4 hover:bg-zinc-800/40 transition flex items-center gap-4"
+                  className="w-full text-left p-4 hover:bg-gray-100 transition flex items-center gap-4"
                 >
                   <img
                     src={b.screenshot}
@@ -184,18 +184,18 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
                     className="w-16 h-12 rounded object-cover shrink-0"
                   />
                   <div className="flex-1 min-w-0">
-                    <div className="text-sm font-bold text-white truncate">
+                    <div className="text-sm font-bold text-gray-900 truncate">
                       {i + 1}. {b.title}
                     </div>
-                    <div className="text-xs text-zinc-500 mt-0.5">
+                    <div className="text-xs text-gray-500 mt-0.5">
                       {b.category} · {b.liveUrl.replace(/^https?:\/\//, '').replace(/\/$/, '')}
                     </div>
                   </div>
                   <div className="text-right shrink-0">
-                    <div className="text-sm font-bold text-emerald-400">
+                    <div className="text-sm font-bold text-blue-400">
                       {formatCurrency(b.askingPrice)}
                     </div>
-                    <div className="text-[10px] text-zinc-500 mt-0.5">Read article →</div>
+                    <div className="text-[10px] text-gray-500 mt-0.5">Read article →</div>
                   </div>
                 </button>
               ))}
@@ -206,16 +206,16 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
         {/* Feature blocks */}
         {featureBlocks.map((block, i) => (
           <section key={i} className="space-y-4">
-            <h2 className="text-2xl font-black text-white flex items-center gap-2">
-              <block.icon className="w-6 h-6 text-emerald-400" />
+            <h2 className="text-2xl font-black text-gray-900 flex items-center gap-2">
+              <block.icon className="w-6 h-6 text-blue-400" />
               {block.title}
             </h2>
-            <p className="text-base text-zinc-300 leading-relaxed">{block.description}</p>
+            <p className="text-base text-gray-700 leading-relaxed">{block.description}</p>
             <ul className="space-y-2.5">
               {block.bullets.map((b, j) => (
                 <li key={j} className="flex items-start gap-3">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
-                  <span className="text-sm text-zinc-300 leading-relaxed">{b}</span>
+                  <CheckCircle2 className="w-5 h-5 text-blue-400 shrink-0 mt-0.5" />
+                  <span className="text-sm text-gray-700 leading-relaxed">{b}</span>
                 </li>
               ))}
             </ul>
@@ -224,35 +224,35 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
 
         {/* How it works for buyers */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-black text-white">
+          <h2 className="text-2xl font-black text-gray-900">
             How It Works — For Buyers
           </h2>
-          <ol className="space-y-3 list-decimal list-inside text-sm text-zinc-300 leading-relaxed">
+          <ol className="space-y-3 list-decimal list-inside text-sm text-gray-700 leading-relaxed">
             <li>
-              <strong className="text-white">Browse the marketplace</strong> — filter by
+              <strong className="text-gray-900">Browse the marketplace</strong> — filter by
               category, max price, and verified-only. Sort by featured, price, MRR, profit,
               or newest.
             </li>
             <li>
-              <strong className="text-white">Open a listing</strong> — review the verified
+              <strong className="text-gray-900">Open a listing</strong> — review the verified
               metrics, the About the Live Site section, the real screenshot gallery, and the
               reason for selling.
             </li>
             <li>
-              <strong className="text-white">Make an offer</strong> — submit a formal offer
+              <strong className="text-gray-900">Make an offer</strong> — submit a formal offer
               with a price and message. The seller has 48 hours to respond.
             </li>
             <li>
-              <strong className="text-white">Add to cart + checkout</strong> — if you prefer
+              <strong className="text-gray-900">Add to cart + checkout</strong> — if you prefer
               to buy at asking price, add the business to your cart and proceed to escrow
               checkout.
             </li>
             <li>
-              <strong className="text-white">Conduct due diligence</strong> — during the
+              <strong className="text-gray-900">Conduct due diligence</strong> — during the
               escrow period, verify all metrics against bank statements and analytics access.
             </li>
             <li>
-              <strong className="text-white">Confirm transfer</strong> — once the domain,
+              <strong className="text-gray-900">Confirm transfer</strong> — once the domain,
               codebase, and assets are transferred, release funds from escrow to the seller.
             </li>
           </ol>
@@ -260,36 +260,36 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
 
         {/* How it works for sellers */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-black text-white">
+          <h2 className="text-2xl font-black text-gray-900">
             How It Works — For Sellers
           </h2>
-          <ol className="space-y-3 list-decimal list-inside text-sm text-zinc-300 leading-relaxed">
+          <ol className="space-y-3 list-decimal list-inside text-sm text-gray-700 leading-relaxed">
             <li>
-              <strong className="text-white">Switch to Seller role</strong> — use the avatar
+              <strong className="text-gray-900">Switch to Seller role</strong> — use the avatar
               dropdown in the top right to access the seller dashboard.
             </li>
             <li>
-              <strong className="text-white">List your business</strong> — use the List New
+              <strong className="text-gray-900">List your business</strong> — use the List New
               Business modal to enter title, description, asking price, category, financial
               metrics, and image URL.
             </li>
             <li>
-              <strong className="text-white">Wait for verification</strong> — your listing
+              <strong className="text-gray-900">Wait for verification</strong> — your listing
               enters "pending" status while the admin team verifies your financial claims.
               Once verified, it goes live in the marketplace.
             </li>
             <li>
-              <strong className="text-white">Review offers</strong> — when buyers submit
+              <strong className="text-gray-900">Review offers</strong> — when buyers submit
               offers, they appear in your seller dashboard. Accept, reject, or counter with
               a single click.
             </li>
             <li>
-              <strong className="text-white">Complete the transfer</strong> — once an offer
+              <strong className="text-gray-900">Complete the transfer</strong> — once an offer
               is accepted and the buyer initiates escrow, transfer the domain, codebase, and
               assets. Funds are released when the buyer confirms.
             </li>
             <li>
-              <strong className="text-white">Pay the platform fee</strong> — MakeThisDeal.biz
+              <strong className="text-gray-900">Pay the platform fee</strong> — MakeThisDeal.biz
               charges an 8% commission on the final sale price, deducted from the escrow
               release. No upfront listing fees.
             </li>
@@ -298,10 +298,10 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
 
         {/* Tech stack */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-black text-white">
+          <h2 className="text-2xl font-black text-gray-900">
             Under the Hood — Tech Stack
           </h2>
-          <p className="text-base text-zinc-300 leading-relaxed">
+          <p className="text-base text-gray-700 leading-relaxed">
             MakeThisDeal.biz is built on a modern, production-grade stack:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -317,9 +317,9 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
               { label: 'Auth', value: 'NextAuth.js v4 (available)' },
               { label: 'Deployment', value: 'Vercel (recommended)' },
             ].map((t) => (
-              <Card key={t.label} className="bg-zinc-900 border-zinc-800 p-3 flex justify-between items-center">
-                <span className="text-xs text-zinc-500 uppercase tracking-wider">{t.label}</span>
-                <span className="text-sm font-bold text-white">{t.value}</span>
+              <Card key={t.label} className="bg-white border-gray-200 p-3 flex justify-between items-center">
+                <span className="text-xs text-gray-500 uppercase tracking-wider">{t.label}</span>
+                <span className="text-sm font-bold text-gray-900">{t.value}</span>
               </Card>
             ))}
           </div>
@@ -327,18 +327,18 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
 
         {/* CTA */}
         <section>
-          <Card className="bg-gradient-to-br from-emerald-900/40 via-zinc-900 to-zinc-950 border-emerald-800/40 p-8 text-center">
+          <Card className="bg-gradient-to-br from-blue-900/40 via-[#102956] to-[#0B1B3A] border-blue-800/40 p-8 text-center">
             <h3 className="text-xl sm:text-2xl font-black text-white mb-2">
               Ready to explore the marketplace?
             </h3>
-            <p className="text-sm text-zinc-400 mb-5 max-w-xl mx-auto">
+            <p className="text-sm text-blue-100 mb-5 max-w-xl mx-auto">
               Browse all {SEO_BUSINESSES.length} verified business listings with full
               financial metrics, real screenshots, and escrow-protected checkout.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
                 onClick={() => setView('marketplace')}
-                className="bg-emerald-600 hover:bg-emerald-500 text-white"
+                className="bg-blue-600 hover:bg-blue-500 text-gray-900"
               >
                 Browse Marketplace
                 <ArrowRight className="w-4 h-4 ml-2" />
@@ -346,7 +346,7 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
               <Button
                 onClick={onBack}
                 variant="outline"
-                className="bg-transparent border-zinc-700 text-white hover:bg-zinc-800"
+                className="bg-transparent border-gray-300 text-gray-900 hover:bg-gray-100"
               >
                 Back to Blog
               </Button>

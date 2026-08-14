@@ -31,7 +31,7 @@ export function OfferModal({ business, isOpen, onClose }: OfferModalProps) {
   // naturally when a new business is selected — no useEffect needed.
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="bg-zinc-950 border-zinc-800 max-w-lg">
+      <DialogContent className="bg-gray-50 border-gray-200 max-w-lg">
         {business && (
           <OfferForm key={business.id} business={business} onClose={onClose} />
         )}
@@ -73,30 +73,30 @@ function OfferForm({ business, onClose }: OfferFormProps) {
   return (
     <>
       <DialogHeader>
-        <DialogTitle className="flex items-center gap-2 text-white">
-          <Tag className="w-5 h-5 text-emerald-400" />
+        <DialogTitle className="flex items-center gap-2 text-gray-900">
+          <Tag className="w-5 h-5 text-blue-400" />
           Make an Offer
         </DialogTitle>
-        <DialogDescription className="text-zinc-400">
+        <DialogDescription className="text-gray-600">
           Submit a formal offer to acquire this business. The seller will respond
           within 48 hours.
         </DialogDescription>
       </DialogHeader>
 
-      <div className="flex gap-3 p-3 rounded-xl bg-zinc-900 border border-zinc-800 mb-2">
+      <div className="flex gap-3 p-3 rounded-xl bg-white border border-gray-200 mb-2">
         <img
           src={business.images[0]}
           alt={business.title}
           className="w-16 h-16 rounded-lg object-cover shrink-0"
         />
         <div className="flex-1 min-w-0">
-          <h4 className="text-sm font-semibold text-white line-clamp-1">
+          <h4 className="text-sm font-semibold text-gray-900 line-clamp-1">
             {business.title}
           </h4>
-          <p className="text-xs text-zinc-500 mt-0.5">{business.category}</p>
+          <p className="text-xs text-gray-500 mt-0.5">{business.category}</p>
           <div className="flex items-center gap-2 mt-1.5">
-            <span className="text-sm text-zinc-400">Asking:</span>
-            <span className="text-sm font-bold text-emerald-400">
+            <span className="text-sm text-gray-600">Asking:</span>
+            <span className="text-sm font-bold text-blue-400">
               {formatCurrency(business.askingPrice)}
             </span>
           </div>
@@ -105,11 +105,11 @@ function OfferForm({ business, onClose }: OfferFormProps) {
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="offer-price" className="text-zinc-300">
+          <Label htmlFor="offer-price" className="text-gray-700">
             Your Offer (USD)
           </Label>
           <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500">$</span>
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
             <Input
               id="offer-price"
               type="number"
@@ -117,13 +117,13 @@ function OfferForm({ business, onClose }: OfferFormProps) {
               onChange={(e) => setOfferPrice(e.target.value)}
               min={1}
               step={100}
-              className="pl-8 bg-zinc-900 border-zinc-800 text-white"
+              className="pl-8 bg-white border-gray-200 text-gray-900"
               placeholder="0"
             />
           </div>
           {offerPrice && !isNaN(parseFloat(offerPrice)) && (
             <div className="flex items-center justify-between text-xs">
-              <span className="text-zinc-500">
+              <span className="text-gray-500">
                 {pctOfAsking}% of asking price
               </span>
               {pctOfAsking < 70 && (
@@ -132,7 +132,7 @@ function OfferForm({ business, onClose }: OfferFormProps) {
                 </Badge>
               )}
               {pctOfAsking >= 95 && pctOfAsking <= 100 && (
-                <Badge className="bg-emerald-900/40 text-emerald-400 border-emerald-800 text-[10px]">
+                <Badge className="bg-blue-900/40 text-blue-400 border-blue-800 text-[10px]">
                   Strong offer
                 </Badge>
               )}
@@ -141,7 +141,7 @@ function OfferForm({ business, onClose }: OfferFormProps) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="offer-message" className="text-zinc-300">
+          <Label htmlFor="offer-message" className="text-gray-700">
             Message to Seller (optional)
           </Label>
           <Textarea
@@ -149,7 +149,7 @@ function OfferForm({ business, onClose }: OfferFormProps) {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             rows={3}
-            className="bg-zinc-900 border-zinc-800 text-white resize-none"
+            className="bg-white border-gray-200 text-gray-900 resize-none"
             placeholder="Introduce yourself, your acquisition timeline, and why you're interested..."
           />
         </div>
@@ -159,13 +159,13 @@ function OfferForm({ business, onClose }: OfferFormProps) {
             type="button"
             variant="outline"
             onClick={onClose}
-            className="bg-transparent border-zinc-700 text-zinc-300 hover:bg-zinc-900"
+            className="bg-transparent border-gray-300 text-gray-700 hover:bg-white"
           >
             Cancel
           </Button>
           <Button
             type="submit"
-            className="bg-emerald-600 hover:bg-emerald-500 text-white"
+            className="bg-blue-600 hover:bg-blue-500 text-gray-900"
           >
             <Send className="w-4 h-4 mr-2" />
             Submit Offer

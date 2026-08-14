@@ -58,11 +58,11 @@ export default function Home() {
           : undefined;
         if (!post) {
           return (
-            <div className="min-h-screen bg-zinc-950 flex flex-col items-center justify-center p-8 text-center">
-              <h2 className="text-xl font-bold text-white mb-2">Article not found</h2>
+            <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-8 text-center">
+              <h2 className="text-xl font-bold text-gray-900 mb-2">Article not found</h2>
               <button
                 onClick={() => setView('blog-index')}
-                className="text-emerald-400 hover:text-emerald-300"
+                className="text-blue-400 hover:text-blue-300"
               >
                 Back to Blog
               </button>
@@ -100,7 +100,7 @@ export default function Home() {
     isAdminLogin;
 
   return (
-    <div className="min-h-screen flex flex-col bg-zinc-950">
+    <div className="min-h-screen flex flex-col bg-gray-50">
       <Toaster
         position="top-right"
         theme="dark"

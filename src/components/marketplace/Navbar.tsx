@@ -65,12 +65,12 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-zinc-950/95 backdrop-blur-md border-b border-zinc-800">
+    <header className="sticky top-0 z-50 bg-[#0B1B3A]/95 backdrop-blur-md border-b border-[#1d3a6e]">
       {/* Utility banner */}
-      <div className="bg-emerald-700 text-emerald-50">
+      <div className="bg-blue-700 text-emerald-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 text-xs flex justify-between items-center gap-4">
           <div className="flex items-center gap-2 min-w-0">
-            <ShieldCheck className="w-3.5 h-3.5 text-emerald-300 shrink-0" />
+            <ShieldCheck className="w-3.5 h-3.5 text-blue-300 shrink-0" />
             <span className="truncate">
               Curated acquisition storefront · Verified listings · Escrow-protected transactions
             </span>
@@ -110,12 +110,12 @@ export function Navbar() {
                 placeholder="Search profitable businesses, SaaS, e-commerce, agencies..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-zinc-900 border-zinc-800 text-zinc-200 placeholder:text-zinc-500 pl-11 pr-24 h-11 focus-visible:border-emerald-600 focus-visible:ring-emerald-600/20"
+                className="w-full bg-[#102956] border-[#1d3a6e] text-zinc-200 placeholder:text-zinc-500 pl-11 pr-24 h-11 focus-visible:border-blue-600 focus-visible:ring-blue-600/20"
               />
               <Button
                 type="submit"
                 size="sm"
-                className="absolute right-1.5 top-1.5 bg-emerald-600 hover:bg-emerald-500 text-white"
+                className="absolute right-1.5 top-1.5 bg-blue-600 hover:bg-blue-500 text-white"
               >
                 Search
               </Button>
@@ -131,9 +131,9 @@ export function Navbar() {
                 size="sm"
                 onClick={() => go(item.view)}
                 className={cn(
-                  'text-sm font-medium hover:text-emerald-400 hover:bg-zinc-900',
+                  'text-sm font-medium hover:text-blue-400 hover:bg-[#102956]',
                   currentView === item.view || (currentView === 'blog-post' && item.view === 'blog-index') || (currentView === 'blog-features' && item.view === 'blog-index')
-                    ? 'text-emerald-400 bg-zinc-900'
+                    ? 'text-blue-400 bg-[#102956]'
                     : 'text-zinc-300',
                 )}
               >
@@ -147,9 +147,9 @@ export function Navbar() {
                 size="sm"
                 onClick={() => go('admin-dashboard')}
                 className={cn(
-                  'text-sm font-medium hover:text-emerald-400 hover:bg-zinc-900',
+                  'text-sm font-medium hover:text-blue-400 hover:bg-[#102956]',
                   currentView === 'admin-dashboard'
-                    ? 'text-emerald-400 bg-zinc-900'
+                    ? 'text-blue-400 bg-[#102956]'
                     : 'text-zinc-300',
                 )}
               >
@@ -157,12 +157,12 @@ export function Navbar() {
               </Button>
             )}
 
-            <div className="flex items-center gap-1 pl-3 ml-1 border-l border-zinc-800">
+            <div className="flex items-center gap-1 pl-3 ml-1 border-l border-[#1d3a6e]">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => go('user-dashboard')}
-                className="relative text-zinc-300 hover:text-rose-400 hover:bg-zinc-900"
+                className="relative text-zinc-300 hover:text-rose-400 hover:bg-[#102956]"
               >
                 <Heart className="w-5 h-5" />
                 {wishlist.length > 0 && (
@@ -176,11 +176,11 @@ export function Navbar() {
                 variant="ghost"
                 size="icon"
                 onClick={() => setCartOpen(true)}
-                className="relative text-zinc-300 hover:text-emerald-400 hover:bg-zinc-900"
+                className="relative text-zinc-300 hover:text-blue-400 hover:bg-[#102956]"
               >
                 <ShoppingCart className="w-5 h-5" />
                 {totalCartItems > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-emerald-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-blue-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                     {totalCartItems}
                   </span>
                 )}
@@ -189,41 +189,41 @@ export function Navbar() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className="ml-1 flex items-center gap-2 rounded-full hover:opacity-90 transition">
-                    <Avatar className="w-9 h-9 border-2 border-emerald-500/50">
+                    <Avatar className="w-9 h-9 border-2 border-blue-500/50">
                       <AvatarImage src={currentUser.avatar} alt={currentUser.name} />
-                      <AvatarFallback className="bg-zinc-800 text-emerald-400 text-xs">
+                      <AvatarFallback className="bg-[#1d3a6e] text-blue-400 text-xs">
                         {currentUser.name.charAt(0)}
                       </AvatarFallback>
                     </Avatar>
                     <ChevronDown className="w-3.5 h-3.5 text-zinc-500 hidden xl:block" />
                   </button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-60 bg-zinc-900 border-zinc-800">
+                <DropdownMenuContent align="end" className="w-60 bg-[#102956] border-[#1d3a6e]">
                   <DropdownMenuLabel className="text-zinc-400">
                     <div className="flex flex-col">
                       <span className="text-white font-semibold">{currentUser.name}</span>
                       <span className="text-xs text-zinc-500 font-normal">{currentUser.email}</span>
-                      <Badge className="mt-1.5 w-fit text-[10px] uppercase tracking-wider bg-emerald-900/40 text-emerald-400 border-emerald-800">
+                      <Badge className="mt-1.5 w-fit text-[10px] uppercase tracking-wider bg-blue-900/40 text-blue-400 border-blue-800">
                         {currentUser.role}
                       </Badge>
                     </div>
                   </DropdownMenuLabel>
-                  <DropdownMenuSeparator className="bg-zinc-800" />
+                  <DropdownMenuSeparator className="bg-[#1d3a6e]" />
                   <div className="px-2 py-1.5 text-[10px] uppercase tracking-wider text-zinc-500 font-bold">
                     Switch Role
                   </div>
                   <DropdownMenuItem
                     onClick={() => switchRole('user')}
-                    className="text-zinc-300 hover:bg-zinc-800 hover:text-emerald-400 cursor-pointer"
+                    className="text-zinc-300 hover:bg-[#1d3a6e] hover:text-blue-400 cursor-pointer"
                   >
-                    <UserIcon className="w-3.5 h-3.5 mr-2 text-emerald-500" />
+                    <UserIcon className="w-3.5 h-3.5 mr-2 text-blue-500" />
                     Buyer / User
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => go('admin-dashboard')}
-                    className="text-zinc-300 hover:bg-zinc-800 hover:text-emerald-400 cursor-pointer"
+                    className="text-zinc-300 hover:bg-[#1d3a6e] hover:text-blue-400 cursor-pointer"
                   >
-                    <LayoutDashboard className="w-3.5 h-3.5 mr-2 text-emerald-500" />
+                    <LayoutDashboard className="w-3.5 h-3.5 mr-2 text-blue-500" />
                     Admin Login
                   </DropdownMenuItem>
                 </DropdownMenuContent>
@@ -241,7 +241,7 @@ export function Navbar() {
             >
               <ShoppingCart className="w-5 h-5" />
               {totalCartItems > 0 && (
-                <span className="absolute -top-1 -right-1 bg-emerald-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-blue-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                   {totalCartItems}
                 </span>
               )}
@@ -260,7 +260,7 @@ export function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="lg:hidden bg-zinc-950 border-t border-zinc-800 px-4 pt-4 pb-6 space-y-4 shadow-2xl">
+        <div className="lg:hidden bg-[#0B1B3A] border-t border-[#1d3a6e] px-4 pt-4 pb-6 space-y-4 shadow-2xl">
           <form onSubmit={handleSearch} className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
             <Input
@@ -268,7 +268,7 @@ export function Navbar() {
               placeholder="Search businesses..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-zinc-900 border-zinc-800 text-zinc-200 placeholder:text-zinc-500 pl-10 h-10"
+              className="w-full bg-[#102956] border-[#1d3a6e] text-zinc-200 placeholder:text-zinc-500 pl-10 h-10"
             />
           </form>
 
@@ -280,8 +280,8 @@ export function Navbar() {
                 className={cn(
                   'block w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium',
                   currentView === item.view || (currentView === 'blog-post' && item.view === 'blog-index') || (currentView === 'blog-features' && item.view === 'blog-index')
-                    ? 'bg-zinc-900 text-emerald-400'
-                    : 'text-zinc-300 hover:bg-zinc-900',
+                    ? 'bg-[#102956] text-blue-400'
+                    : 'text-zinc-300 hover:bg-[#102956]',
                 )}
               >
                 {item.label}
@@ -289,13 +289,13 @@ export function Navbar() {
             ))}
             <button
               onClick={() => go('admin-dashboard')}
-              className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-300 hover:bg-zinc-900"
+              className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-300 hover:bg-[#102956]"
             >
               Admin Panel
             </button>
           </div>
 
-          <div className="pt-4 border-t border-zinc-800">
+          <div className="pt-4 border-t border-[#1d3a6e]">
             <p className="text-xs text-zinc-500 mb-2">Switch role:</p>
             <div className="grid grid-cols-2 gap-2">
               <Button
@@ -307,8 +307,8 @@ export function Navbar() {
                 }}
                 className={
                   currentUser.role === 'user'
-                    ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
-                    : 'bg-transparent border-zinc-700 text-zinc-300'
+                    ? 'bg-blue-600 hover:bg-blue-500 text-white'
+                    : 'bg-transparent border-[#2b4a85] text-zinc-300'
                 }
               >
                 Buyer
@@ -319,7 +319,7 @@ export function Navbar() {
                   go('admin-dashboard');
                   setMobileOpen(false);
                 }}
-                className="bg-transparent border-zinc-700 text-zinc-300 hover:bg-zinc-900"
+                className="bg-transparent border-[#2b4a85] text-zinc-300 hover:bg-[#102956]"
               >
                 Admin Login
               </Button>

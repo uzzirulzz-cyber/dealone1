@@ -160,3 +160,35 @@ Stage Summary:
 - Each blog post contains: hero, screenshot, key metrics, 6 features, 5 reasons to acquire, 5-8 due diligence items, pricing analysis, 5-step acquisition flow, 4 FAQs, 8 SEO tags, 3 related posts
 - All cross-linked: blog posts link to listings, listings link to blog, footer links to blog, navbar links to blog, home page has blog teaser
 - Live on GitHub: https://github.com/uzzirulzz-cyber/dealone1/commit/7150e59
+
+---
+Task ID: rebrand-and-no-selling
+Agent: Super Z (main agent)
+Task: Rebrand to MakeThisDeal.biz with user-provided logo, remove fake stats, add admin login (trade@trade.com / trade123), remove ALL selling functionality
+
+Work Log:
+- Copied user-uploaded logo (1921x819 PNG, 870KB) from /upload/ to /public/logo.png
+- Updated SITE config in src/lib/seo.ts: name='MakeThisDeal.biz', shortName='MakeThisDeal', tagline='Acquire Profitable Online Businesses', url='https://makethisdeal.biz', twitter='@makethisdeal', logo='/logo.png', adminEmail='trade@trade.com', adminPassword='trade123'. Removed 'sell a business' from keywords.
+- Updated src/app/layout.tsx: title template, description, OG image, Twitter card image, icons (icon + apple), JSON-LD Organization name + logo URL + sameAs Twitter handle. All now reference MakeThisDeal.biz and /logo.png.
+- Updated Navbar: replaced BizExchange text+Briefcase icon with the logo image; updated utility banner text to 'Curated acquisition storefront · Verified listings · Escrow-protected transactions'; removed Store icon import; removed seller nav button; removed 'Seller / Vendor' option from avatar dropdown; removed 'Seller Dashboard' link from mobile menu; removed 'Seller' button from mobile role switcher (grid is now 2 cols: Buyer + Admin Login)
+- Updated Footer: replaced Briefcase icon+text logo with the logo image; removed entire 'Sell Your Business' column (Sell Your Business, List Your Business, How It Works, Pricing & Fees, Seller Resources); grid reduced from 6 to 5 columns; copyright now references SITE.name dynamically
+- Updated HomeView: deleted the fabricated 'stats' array ($48M+, 420+, 100%, 14 days); replaced hero stats with REAL verified values computed from the actual businesses array: 6 Verified Listings, Escrow Protected Checkout, $750 Lowest Asking Price; updated hero badge from 'Verified Businesses Marketplace · Escrow Protected' to 'Curated Acquisition Storefront · Escrow Protected'; updated hero h1 from 'Buy & Sell Profitable' to 'Acquire Profitable'; replaced 'Sell Your Business' CTA section with buyer-focused 'Ready to acquire your next online business?' CTA pointing to marketplace + blog; updated trust feature #3 from 'Hand-picked Sellers' to 'Curated Catalog' with copy 'We do not accept seller self-submissions. Every business in our catalog is hand-selected by our team from vetted sources — quality over quantity.'; updated 'Why Founders Choose BizExchange' to 'Why Buyers Choose {SITE.name}'; updated blog teaser text from 'BizExchange' to '{SITE.name}'
+- Added AdminLoginView component: full-screen auth card with logo, 'Administrator Login' heading, email + password fields, show/hide password toggle, error banner for invalid creds, 'Sign In to Admin Console' button, security notice, 'Back to storefront' link. Uses SITE.logo for branding.
+- Updated Zustand store: added isAdminAuthenticated state, adminLogin(email, password) action (validates against trade@trade.com / trade123, sets currentUser to admin user, sets currentView to admin-dashboard, returns boolean success), adminLogout() action (resets to buyer user, clears auth, returns to home). Updated switchRole type signature from 'user'|'seller'|'admin' to 'user'|'admin'. Added isAdminAuthenticated to partialize for persistence. Bumped storage key from 'bizexchange-storage-v4' to 'makethisdeal-storage-v1' to clear stale seller state.
+- Updated src/app/page.tsx orchestrator: removed SellerDashboardView import + case; added AdminLoginView import; added auth gate in admin-dashboard case (renders AdminLoginView if !isAdminAuthenticated, otherwise AdminDashboardView); computed isAdminLogin flag to hide Navbar + Footer + CartDrawer on the login screen for focused auth UX
+- Deleted src/components/views/SellerDashboardView.tsx entirely
+- Updated AdminDashboardView: header now shows '{SITE.name} · Platform Overview' + signed-in admin email + Sign Out button; removed verified-seller toggle from Users tab (no more sellers to verify); removed unused updateUserStatus from destructuring; removed verifiedSellers stat calculation; renamed 'Active Users' stat to 'Registered Users'
+- Batch-replaced all remaining 'BizExchange' references across CheckoutView, BusinessDetailView, FeaturesArticleView, BlogIndexView, businessData.ts (admin settings siteName + logo)
+- Updated README.md: title changed from 'Buy & Sell Profitable' to 'Acquire Profitable'; all BizExchange → MakeThisDeal.biz; bizexchange.vercel.app → makethisdeal.biz; @bizexchange → @makethisdeal
+- Re-seeded Neon PostgreSQL database — adminSettings.siteName now 'MakeThisDeal.biz', 6 businesses + 3 users + 2 offers + 1 order unchanged
+- Lint passes clean; browser-verified: logo loads in navbar/footer/admin-login, page title correct, hero stats show real values (6 listings / Escrow / $750), no 'Sell Your Business' anywhere, avatar dropdown shows only Buyer + Admin Login, admin login flow works (wrong creds → error, trade@trade.com/trade123 → success → dashboard with Sign Out)
+- Committed as single squashed commit (852d8e9) and pushed to https://github.com/uzzirulzz-cyber/dealone1
+- Verified via GitHub API: logo.png (870KB) is in the repo, SellerDashboardView.tsx returns 404 (deleted), commit message visible on github.com
+
+Stage Summary:
+- Site is now MakeThisDeal.biz with the user's attached logo
+- ALL unverifiable/false stats removed from home page — replaced with real, computed values
+- Admin login live at the admin route (via SPA state) with credentials trade@trade.com / trade123
+- ALL selling functionality removed: no seller role, no seller dashboard, no 'List Your Business', no 'Sell Your Business' CTA, no seller footer column
+- Trust feature explicitly states 'We do not accept seller self-submissions'
+- Live on GitHub: https://github.com/uzzirulzz-cyber/dealone1/commit/852d8e9

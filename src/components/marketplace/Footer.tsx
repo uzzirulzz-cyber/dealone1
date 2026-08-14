@@ -11,7 +11,7 @@ export function Footer() {
   const go = (view: ViewName) => setView(view);
 
   return (
-    <footer className="mt-auto bg-zinc-950 border-t border-zinc-800 text-zinc-400">
+    <footer className="mt-auto bg-[#0B1B3A] border-t border-[#1d3a6e] text-zinc-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10">
           {/* Brand */}
@@ -30,7 +30,7 @@ export function Footer() {
               {[Twitter, Linkedin, Github].map((Icon, i) => (
                 <button
                   key={i}
-                  className="w-9 h-9 rounded-lg bg-zinc-900 hover:bg-emerald-900/40 border border-zinc-800 hover:border-emerald-800 flex items-center justify-center text-zinc-400 hover:text-emerald-400 transition"
+                  className="w-9 h-9 rounded-lg bg-[#102956] hover:bg-blue-900/40 border border-[#1d3a6e] hover:border-blue-800 flex items-center justify-center text-zinc-400 hover:text-blue-400 transition"
                   aria-label="social link"
                 >
                   <Icon className="w-4 h-4" />
@@ -46,27 +46,27 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <button onClick={() => go('marketplace')} className="hover:text-emerald-400 transition">
+                <button onClick={() => go('marketplace')} className="hover:text-blue-400 transition">
                   All Listings ({businesses.length})
                 </button>
               </li>
               <li>
-                <button onClick={() => go('marketplace')} className="hover:text-emerald-400 transition">
+                <button onClick={() => go('marketplace')} className="hover:text-blue-400 transition">
                   Featured Deals
                 </button>
               </li>
               <li>
-                <button onClick={() => go('marketplace')} className="hover:text-emerald-400 transition">
+                <button onClick={() => go('marketplace')} className="hover:text-blue-400 transition">
                   SaaS For Sale
                 </button>
               </li>
               <li>
-                <button onClick={() => go('marketplace')} className="hover:text-emerald-400 transition">
+                <button onClick={() => go('marketplace')} className="hover:text-blue-400 transition">
                   E-Commerce Stores
                 </button>
               </li>
               <li>
-                <button onClick={() => go('marketplace')} className="hover:text-emerald-400 transition">
+                <button onClick={() => go('marketplace')} className="hover:text-blue-400 transition">
                   Agencies
                 </button>
               </li>
@@ -80,22 +80,22 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <button onClick={() => go('blog-index')} className="hover:text-emerald-400 transition">
+                <button onClick={() => go('blog-index')} className="hover:text-blue-400 transition">
                   All Articles
                 </button>
               </li>
               <li>
-                <button onClick={() => go('blog-features')} className="hover:text-emerald-400 transition">
+                <button onClick={() => go('blog-features')} className="hover:text-blue-400 transition">
                   Platform Features
                 </button>
               </li>
               <li>
-                <button onClick={() => go('blog-index')} className="hover:text-emerald-400 transition">
+                <button onClick={() => go('blog-index')} className="hover:text-blue-400 transition">
                   Acquisition Guides
                 </button>
               </li>
               <li>
-                <button onClick={() => go('blog-index')} className="hover:text-emerald-400 transition">
+                <button onClick={() => go('blog-index')} className="hover:text-blue-400 transition">
                   Due Diligence Tips
                 </button>
               </li>
@@ -109,34 +109,34 @@ export function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm">
               <li className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                <ShieldCheck className="w-4 h-4 text-blue-500" />
                 Verified Listings
               </li>
               <li className="flex items-center gap-2">
-                <TrendingUp className="w-4 h-4 text-emerald-500" />
+                <TrendingUp className="w-4 h-4 text-blue-500" />
                 Financial Due Diligence
               </li>
               <li className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                <ShieldCheck className="w-4 h-4 text-blue-500" />
                 Escrow Protection
               </li>
               <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-emerald-500" />
+                <Mail className="w-4 h-4 text-blue-500" />
                 24/7 Support
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-zinc-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+        <div className="mt-10 pt-6 border-t border-[#1d3a6e] flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
           <p className="text-zinc-500">
             &copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.
           </p>
           <div className="flex items-center gap-5 text-zinc-500">
-            <button className="hover:text-emerald-400 transition">Privacy</button>
-            <button className="hover:text-emerald-400 transition">Terms</button>
-            <button className="hover:text-emerald-400 transition">Escrow Policy</button>
-            <button className="hover:text-emerald-400 transition">Contact</button>
+            <button className="hover:text-blue-400 transition">Privacy</button>
+            <button className="hover:text-blue-400 transition">Terms</button>
+            <button className="hover:text-blue-400 transition">Escrow Policy</button>
+            <button className="hover:text-blue-400 transition">Contact</button>
           </div>
         </div>
       </div>

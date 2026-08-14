@@ -37,22 +37,22 @@ export function AdminLoginView() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4 py-12 relative overflow-hidden">
+    <div className="min-h-screen bg-[#0B1B3A] flex items-center justify-center px-4 py-12 relative overflow-hidden">
       {/* Decorative background */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-emerald-600/10 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none [background-image:linear-gradient(to_right,#10b981_1px,transparent_1px),linear-gradient(to_bottom,#10b981_1px,transparent_1px)] [background-size:32px_32px]" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-blue-600/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none [background-image:linear-gradient(to_right,#2563EB_1px,transparent_1px),linear-gradient(to_bottom,#2563EB_1px,transparent_1px)] [background-size:32px_32px]" />
 
       <div className="relative z-10 w-full max-w-md">
         {/* Back link */}
         <button
           onClick={() => setView('home')}
-          className="inline-flex items-center gap-1.5 text-sm text-zinc-400 hover:text-emerald-400 transition mb-6"
+          className="inline-flex items-center gap-1.5 text-sm text-zinc-400 hover:text-blue-400 transition mb-6"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to storefront
         </button>
 
-        <Card className="bg-zinc-900 border-zinc-800 p-8">
+        <Card className="bg-[#102956] border-[#1d3a6e] p-8">
           {/* Logo + header */}
           <div className="text-center mb-6">
             <img
@@ -60,7 +60,7 @@ export function AdminLoginView() {
               alt={`${SITE.name} logo`}
               className="h-12 w-auto object-contain mx-auto mb-4"
             />
-            <Badge className="bg-emerald-900/40 border-emerald-800 text-emerald-400 mb-3">
+            <Badge className="bg-blue-900/40 border-blue-800 text-blue-400 mb-3">
               <Lock className="w-3 h-3 mr-1" />
               Admin Access
             </Badge>
@@ -95,7 +95,7 @@ export function AdminLoginView() {
                   required
                   autoComplete="email"
                   placeholder="admin@example.com"
-                  className="bg-zinc-950 border-zinc-800 text-white pl-10 h-11"
+                  className="bg-[#0B1B3A] border-[#1d3a6e] text-white pl-10 h-11"
                 />
               </div>
             </div>
@@ -114,7 +114,7 @@ export function AdminLoginView() {
                   required
                   autoComplete="current-password"
                   placeholder="••••••••"
-                  className="bg-zinc-950 border-zinc-800 text-white pl-10 pr-10 h-11"
+                  className="bg-[#0B1B3A] border-[#1d3a6e] text-white pl-10 pr-10 h-11"
                 />
                 <button
                   type="button"
@@ -130,14 +130,14 @@ export function AdminLoginView() {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white h-11 mt-2"
+              className="w-full bg-blue-600 hover:bg-blue-500 text-white h-11 mt-2"
             >
               {loading ? 'Verifying…' : 'Sign In to Admin Console'}
             </Button>
           </form>
 
-          <div className="mt-6 pt-5 border-t border-zinc-800 flex items-start gap-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+          <div className="mt-6 pt-5 border-t border-[#1d3a6e] flex items-start gap-2">
+            <ShieldCheck className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
             <p className="text-[11px] text-zinc-500 leading-relaxed">
               All admin access is logged. Unauthorized access attempts are monitored and
               may be reported to the platform owner. By signing in you agree to the
