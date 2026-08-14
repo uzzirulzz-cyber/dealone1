@@ -145,7 +145,8 @@ This project includes full AdSense integration — the verification meta tag, th
 ### What's already wired
 - `<meta name="google-adsense-account" content="ca-pub-8143075550797983">` in `<head>` (verification)
 - `adsbygoogle.js` script loaded via `next/script` with `afterInteractive` strategy
-- 7 ad slots placed across views:
+- **Auto-ads enabled** — inline script pushes `enable_page_level_ads: true` so Google automatically places ads in optimal positions across every page (in addition to the 7 manual placements)
+- 7 manual ad slots placed across views (auto-ads supplement these — not replace):
   - `homeFeatured` — after featured listings on home page
   - `homeCategories` — after the categories strip on home page
   - `marketplaceList` — below the marketplace listing grid
@@ -173,7 +174,9 @@ This project includes full AdSense integration — the verification meta tag, th
 ### Notes
 - Ads will appear as empty gray boxes in development (slot IDs are placeholders)
 - The `AdSlot` component fails silently if adsbygoogle.js hasn't loaded — the page still renders fine
-- AdSense auto-ads are NOT enabled (we use manual placements for control over where ads appear)
+- **Auto-ads ARE enabled** (`enable_page_level_ads: true`) — Google will automatically place additional ads across pages, on top of the 7 manual placements
+- To disable auto-ads (keep only manual placements), remove the `adsbygoogle-auto-ads` `<Script>` block from `src/app/layout.tsx`
+- To disable manual ads (keep only auto-ads), remove all `<AdSlot>` components from the views
 
 ## 📝 License
 

@@ -312,3 +312,57 @@ Stage Summary:
 - Hero text is now fully visible on the navy gradient (white + blue-100/blue-200)
 - WhatsApp contact available via 3 places: floating green button (bottom-right), footer Trust column, footer bottom bar
 - Live on GitHub: https://github.com/uzzirulzz-cyber/dealone1/commit/18281db
+
+---
+Task ID: add-actual-adsense
+Agent: Super Z (main agent)
+Task: Add actual Google AdSense — the adsbygoogle.js script + manual ad placements across the site
+
+Work Log:
+- Added SITE.adsenseSlots config to src/lib/seo.ts with 7 placeholder slot IDs (1111111111 through 8888888888) for: homeFeatured, homeCategories, marketplaceList, blogIndex, blogPostMid, blogPostEnd, businessDetail, sidebar
+- Updated src/app/layout.tsx to import next/script and inject the AdSense script in <head>:
+    <Script
+      id="adsbygoogle-init"
+      strategy="afterInteractive"
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8143075550797983"
+      crossOrigin="anonymous"
+    />
+  Uses afterInteractive strategy so it doesn't block page render.
+- Created src/components/marketplace/AdSlot.tsx — reusable ad unit component:
+  - Props: slotKey (keyof SITE.adsenseSlots), format (auto/horizontal/vertical/rectangle/fluid), responsive (bool), className, showLabel
+  - Renders <ins class="adsbygoogle"> with data-ad-client, data-ad-slot, data-ad-format, data-full-width-responsive attributes
+  - useEffect pushes to (window.adsbygoogle = window.adsbygoogle || []).push({}) after mount
+  - Fails silently if adsbygoogle.js hasn't loaded (page still renders fine)
+  - "Advertisement" label above each ad unit (toggleable via showLabel)
+  - Wrapped in a styled container (gray-50 bg, gray-200 border, min-h-90px) so it looks clean even before ads serve
+- Placed 7 ad slots across the site:
+  1. HomeView: AdSlot slotKey="homeFeatured" format="horizontal" — after featured listings grid
+  2. HomeView: AdSlot slotKey="homeCategories" format="horizontal" className="mt-12" — after categories strip
+  3. MarketplaceView: AdSlot slotKey="marketplaceList" format="horizontal" className="mt-10" — below listing grid
+  4. BlogIndexView: AdSlot slotKey="blogIndex" format="horizontal" — between blog cards and CTA
+  5. BlogPostView: AdSlot slotKey="blogPostMid" format="horizontal" — mid-article, before Pricing Analysis section
+  6. BlogPostView: AdSlot slotKey="blogPostEnd" format="horizontal" — end of article, before Tags section
+  7. BusinessDetailView: AdSlot slotKey="businessDetail" format="horizontal" — bottom of page, after the aside
+- Updated README.md with comprehensive "Google AdSense Setup" section documenting:
+  - What's already wired (meta tag, script, 7 placements)
+  - 7-step activation process (deploy → AdSense dashboard → wait for approval → create ad units → replace slot IDs in seo.ts → redeploy)
+  - Notes about dev mode (empty gray boxes), silent failure, no auto-ads
+- Lint passes clean, no runtime errors in dev log
+- Browser-verified:
+  - AdSense script loads: src contains "pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8143075550797983"
+  - Meta tag present: ca-pub-8143075550797983
+  - Home page: 3 ad slots (ins.adsbygoogle) rendered with data-ad-client + data-ad-slot
+  - Blog post: 2 ad slots rendered (blogPostMid slot=5555555555, blogPostEnd slot=6666666666) with format=horizontal
+- Committed as single squashed commit (71dfb6c) and pushed to https://github.com/uzzirulzz-cyber/dealone1
+- Verified via GitHub API: AdSlot.tsx returns 200, commit message visible on github.com
+
+Stage Summary:
+- Full AdSense integration live: meta tag (verification) + adsbygoogle.js script (ad serving) + 7 manual ad placements across home, marketplace, blog index, blog posts, and business detail pages
+- Ads will appear as empty gray boxes in development (placeholder slot IDs) and will fill with real ads once the user:
+  1. Deploys to production
+  2. Gets site approved by Google AdSense
+  3. Creates 7 ad units in their AdSense dashboard
+  4. Replaces the placeholder slot IDs in src/lib/seo.ts with real ones
+  5. Redeploys
+- Live on GitHub: https://github.com/uzzirulzz-cyber/dealone1/commit/71dfb6c

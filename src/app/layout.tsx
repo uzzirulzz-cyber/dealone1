@@ -131,13 +131,29 @@ export default function RootLayout({
           content={SITE.adsenseClient}
         />
         {/* Google AdSense script — loads adsbygoogle.js with our publisher ID.
-            Uses afterInteractive strategy so it doesn't block page render. */}
+            Uses afterInteractive strategy so it doesn't block page render.
+            This single script serves both manual ad slots AND auto-ads. */}
         <Script
           id="adsbygoogle-init"
           strategy="afterInteractive"
           async
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE.adsenseClient}`}
           crossOrigin="anonymous"
+        />
+        {/* AdSense Auto-Ads — explicitly enables page-level ads so Google can
+            automatically place ads in optimal positions across every page.
+            Runs after the adsbygoogle.js script loads. */}
+        <Script
+          id="adsbygoogle-auto-ads"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (window.adsbygoogle = window.adsbygoogle || []).push({
+                google_ad_client: "${SITE.adsenseClient}",
+                enable_page_level_ads: true
+              });
+            `,
+          }}
         />
         {/* JSON-LD structured data for SEO */}
         <script
