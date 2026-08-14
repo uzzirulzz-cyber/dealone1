@@ -1,0 +1,232 @@
+// Prisma schema for BizExchange — PostgreSQL on Neon
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // Used for migrations; falls back to DATABASE_URL
+}
+
+// ============================================================
+// Users & Roles
+// ============================================================
+
+enum UserRole {
+  user
+  seller
+  admin
+}
+
+model User {
+  id              String   @id @default(cuid())
+  name            String
+  email           String   @unique
+  role            UserRole @default(user)
+  avatar          String
+  isVerifiedSeller Boolean @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  businesses      BusinessListing[] @relation("SellerBusinesses")
+  reviews         Review[]
+  offersMade      Offer[]           @relation("BuyerOffers")
+  orders          Order[]
+}
+
+// ============================================================
+// Business Listings
+// ============================================================
+
+enum BusinessCategory {
+  ECOMMERCE
+  SAAS_SOFTWARE
+  CONTENT_MEDIA
+  AGENCY_SERVICES
+  MOBILE_APPS
+  MARKETPLACE
+  SUBSCRIPTION
+  OTHER
+}
+
+enum BusinessStatus {
+  active
+  pending
+  sold
+}
+
+model BusinessListing {
+  id             String           @id @default(cuid())
+  title          String
+  tagline        String
+  description    String           @db.Text
+  askingPrice    Int
+  previousPrice  Int?
+  images         String[]         // array of URLs
+  category       BusinessCategory
+  monetization   String[]         // array of monetization types
+  stock          Int              @default(1)
+  rating         Float            @default(0)
+  reviewsCount   Int              @default(0)
+  isFeatured     Boolean          @default(false)
+  isVerified     Boolean          @default(false)
+  status         BusinessStatus   @default(pending)
+  location       String?
+  techStack      String[]
+  reasonForSelling String?        @db.Text
+  // Metrics (stored as JSON for flexibility — values vary by business)
+  mrr            Int              @default(0)
+  arr            Int?
+  revenue        Int              @default(0)
+  profit         Int              @default(0)
+  profitMargin   Int              @default(0)
+  traffic        Int              @default(0)
+  pageviews      Int?
+  customers      Int?
+  churnRate      Float?
+  ageMonths      Int              @default(0)
+  // Highlights as a JSON array of strings
+  highlights     String[]
+
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  // Relations
+  sellerId       String
+  seller         User             @relation("SellerBusinesses", fields: [sellerId], references: [id])
+  reviews        Review[]
+  offers         Offer[]
+  orderItems     OrderItem[]
+
+  @@index([status, isFeatured])
+  @@index([category])
+  @@index([sellerId])
+}
+
+// ============================================================
+// Reviews
+// ============================================================
+
+model Review {
+  id          String   @id @default(cuid())
+  rating      Int
+  comment     String   @db.Text
+  createdAt   DateTime @default(now())
+
+  businessId  String
+  business    BusinessListing @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@index([businessId])
+}
+
+// ============================================================
+// Offers (buyer → seller negotiation)
+// ============================================================
+
+enum OfferStatus {
+  pending
+  accepted
+  rejected
+  counter
+}
+
+model Offer {
+  id              String      @id @default(cuid())
+  offerPrice      Int
+  originalPrice   Int
+  message         String      @db.Text
+  status          OfferStatus @default(pending)
+  counterPrice    Int?
+  counterMessage  String?     @db.Text
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  businessId      String
+  business        BusinessListing @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  buyerId         String
+  buyer           User        @relation("BuyerOffers", fields: [buyerId], references: [id])
+
+  sellerId        String
+
+  @@index([buyerId])
+  @@index([sellerId])
+  @@index([status])
+}
+
+// ============================================================
+// Orders & Cart Items
+// ============================================================
+
+enum PaymentMethod {
+  escrow
+  wire
+  card
+}
+
+enum PaymentStatus {
+  paid
+  pending
+  escrow
+  failed
+}
+
+enum OrderStatus {
+  IN_ESCROW       @map("In Escrow")
+  DUE_DILIGENCE   @map("Due Diligence")
+  TRANSFERRED     @map("Transferred")
+  CANCELLED       @map("Cancelled")
+}
+
+model Order {
+  id             String         @id @default(cuid())
+  totalAmount    Int
+  paymentMethod  PaymentMethod
+  paymentStatus  PaymentStatus  @default(pending)
+  orderStatus    OrderStatus    @default(IN_ESCROW)
+  createdAt      DateTime       @default(now())
+
+  userId         String
+  user           User           @relation(fields: [userId], references: [id])
+
+  items          OrderItem[]
+
+  @@index([userId])
+}
+
+model OrderItem {
+  id          String   @id @default(cuid())
+  price       Int
+  title       String
+  image       String
+
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  businessId  String
+  business    BusinessListing @relation(fields: [businessId], references: [id])
+
+  @@index([orderId])
+}
+
+// ============================================================
+// Admin Settings (single row)
+// ============================================================
+
+model AdminSettings {
+  id               Int       @id @default(1)
+  siteName         String    @default("BizExchange")
+  logo             String    @default("BizExchange")
+  currency         String    @default("USD")
+  taxRate          Float     @default(5)
+  commissionRate   Float     @default(8)
+  maintenanceMode  Boolean   @default(false)
+  updatedAt        DateTime  @updatedAt
+}
