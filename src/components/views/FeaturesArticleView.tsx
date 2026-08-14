@@ -18,7 +18,7 @@ const featureBlocks = [
     icon: ShieldCheck,
     title: 'Escrow-Protected Transactions',
     description:
-      'Every acquisition on BizExchange flows through a neutral third-party escrow service. Buyer funds are held securely from the moment they initiate checkout until they confirm the business transfer is complete — domain, codebase, and assets all handed over. The seller never receives a dollar until the buyer signs off, and the buyer never risks capital on an unfinished transfer. This is the single most important trust mechanism on the platform, and it is non-negotiable on every transaction regardless of deal size.',
+      'Every acquisition on MakeThisDeal.biz flows through a neutral third-party escrow service. Buyer funds are held securely from the moment they initiate checkout until they confirm the business transfer is complete — domain, codebase, and assets all handed over. The seller never receives a dollar until the buyer signs off, and the buyer never risks capital on an unfinished transfer. This is the single most important trust mechanism on the platform, and it is non-negotiable on every transaction regardless of deal size.',
     bullets: [
       'Funds held by neutral escrow agent for the full due diligence period',
       '14–30 day standard escrow window with optional extensions',
@@ -31,7 +31,7 @@ const featureBlocks = [
     icon: BadgeCheck,
     title: 'Verified Financial Listings',
     description:
-      'Every business listed on BizExchange goes through a financial verification process before it appears in the marketplace. We review P&L statements, bank deposits, payment processor exports, and analytics access. Listings that cannot pass verification are rejected — this is why our catalog is intentionally small (six businesses today) rather than a sprawling marketplace of unverified deals. Quality over quantity is the entire point.',
+      'Every business listed on MakeThisDeal.biz goes through a financial verification process before it appears in the marketplace. We review P&L statements, bank deposits, payment processor exports, and analytics access. Listings that cannot pass verification are rejected — this is why our catalog is intentionally small (six businesses today) rather than a sprawling marketplace of unverified deals. Quality over quantity is the entire point.',
     bullets: [
       'P&L statements cross-referenced against bank deposits',
       'Stripe / PayPal / crypto wallet exports reviewed for revenue claims',
@@ -70,7 +70,7 @@ const featureBlocks = [
     icon: Users,
     title: 'Role-Based Dashboards',
     description:
-      'BizExchange serves three distinct user types, each with their own dashboard experience. Buyers get an orders / wishlist / offers view. Sellers get a listings management view with offer review and a List New Business flow. Admins get a platform oversight view with listing verification, user management, and platform settings (commission rate, tax rate, maintenance mode). Switch between roles from the avatar dropdown in the top right to see each perspective.',
+      'MakeThisDeal.biz serves three distinct user types, each with their own dashboard experience. Buyers get an orders / wishlist / offers view. Sellers get a listings management view with offer review and a List New Business flow. Admins get a platform oversight view with listing verification, user management, and platform settings (commission rate, tax rate, maintenance mode). Switch between roles from the avatar dropdown in the top right to see each perspective.',
     bullets: [
       'Buyer dashboard: orders, wishlist, and submitted offers',
       'Seller dashboard: listing CRUD, incoming offers, revenue stats',
@@ -123,11 +123,11 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.15] mb-4">
-            BizExchange Features — How the Verified Business Marketplace Actually Works
+            MakeThisDeal.biz Features — How the Verified Business Marketplace Actually Works
           </h1>
 
           <p className="text-base sm:text-lg text-zinc-400 leading-relaxed mb-6">
-            A complete walkthrough of every feature on BizExchange: escrow-protected
+            A complete walkthrough of every feature on MakeThisDeal.biz: escrow-protected
             transactions, verified financial listings, structured offer negotiation,
             role-based dashboards, and real live-site screenshots. If you are evaluating
             the platform as a buyer, seller, or operator, this is the definitive guide.
@@ -140,11 +140,11 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
         {/* Intro */}
         <section className="space-y-4">
           <p className="text-base text-zinc-300 leading-relaxed">
-            <strong className="text-white">BizExchange</strong> is a curated marketplace for
+            <strong className="text-white">MakeThisDeal.biz</strong> is a curated marketplace for
             buying and selling profitable online businesses — SaaS platforms, crypto trading
             terminals, digital product marketplaces, AI CRMs, and luxury real estate platforms.
             Unlike sprawling business-for-sale directories that list thousands of unverified
-            deals, BizExchange intentionally keeps its catalog small. As of this writing, the
+            deals, MakeThisDeal.biz intentionally keeps its catalog small. As of this writing, the
             marketplace features <strong className="text-emerald-400">{SEO_BUSINESSES.length} verified businesses</strong>,
             each with real metrics, real screenshots, and a real seller behind it.
           </p>
@@ -164,7 +164,7 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
             The Current Catalog — {SEO_BUSINESSES.length} Verified Businesses
           </h2>
           <p className="text-base text-zinc-300 leading-relaxed">
-            BizExchange currently lists {SEO_BUSINESSES.length} businesses for sale. Every
+            MakeThisDeal.biz currently lists {SEO_BUSINESSES.length} businesses for sale. Every
             listing was sourced from a real production website, captured with a live
             screenshot, and verified for the metrics disclosed below. Asking prices range
             from {formatCurrency(Math.min(...SEO_BUSINESSES.map((b) => b.askingPrice)))} to{' '}
@@ -289,7 +289,7 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
               assets. Funds are released when the buyer confirms.
             </li>
             <li>
-              <strong className="text-white">Pay the platform fee</strong> — BizExchange
+              <strong className="text-white">Pay the platform fee</strong> — MakeThisDeal.biz
               charges an 8% commission on the final sale price, deducted from the escrow
               release. No upfront listing fees.
             </li>
@@ -302,7 +302,7 @@ export function FeaturesArticleView({ onBack, onReadPost }: FeaturesArticleViewP
             Under the Hood — Tech Stack
           </h2>
           <p className="text-base text-zinc-300 leading-relaxed">
-            BizExchange is built on a modern, production-grade stack:
+            MakeThisDeal.biz is built on a modern, production-grade stack:
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[

@@ -41,7 +41,7 @@ export function BlogIndexView({ onReadPost }: BlogIndexViewProps) {
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 text-center space-y-6">
           <Badge className="bg-emerald-900/30 border-emerald-700/40 text-emerald-300 px-4 py-1.5 text-xs font-bold uppercase tracking-wider">
             <BookOpen className="w-3.5 h-3.5 mr-1.5" />
-            BizExchange Blog
+            MakeThisDeal.biz Blog
           </Badge>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.1]">
             Acquisition Insights for{' '}

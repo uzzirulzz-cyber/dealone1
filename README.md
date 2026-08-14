@@ -1,8 +1,8 @@
-# BizExchange — Buy & Sell Profitable Online Businesses
+# MakeThisDeal.biz — Acquire Profitable Online Businesses
 
 A modern Next.js 16 marketplace where founders buy and sell verified online businesses — SaaS platforms, e-commerce stores, agencies, content assets, and subscription businesses. Every listing is financially verified and every transaction is escrow-protected.
 
-![BizExchange](/site-screenshots/playbeat.digital.png)
+![MakeThisDeal.biz](/site-screenshots/playbeat.digital.png)
 
 ## ✨ Features
 

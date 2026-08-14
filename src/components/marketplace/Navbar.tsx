@@ -7,12 +7,10 @@ import {
   Search,
   ShieldCheck,
   User as UserIcon,
-  Store,
   LayoutDashboard,
   Menu,
   X,
   ChevronDown,
-  Briefcase,
   BookOpen,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -28,6 +26,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { useMarketplace } from '@/lib/store';
+import { SITE } from '@/lib/seo';
 import type { ViewName } from '@/lib/types';
 import { cn } from '@/lib/utils';
 
@@ -73,7 +72,7 @@ export function Navbar() {
           <div className="flex items-center gap-2 min-w-0">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-300 shrink-0" />
             <span className="truncate">
-              Verified business listings · Secure escrow protection · 8% platform fee
+              Curated acquisition storefront · Verified listings · Escrow-protected transactions
             </span>
           </div>
           <div className="hidden md:flex items-center gap-3 shrink-0">
@@ -93,19 +92,13 @@ export function Navbar() {
           {/* Logo */}
           <button
             onClick={() => go('home')}
-            className="flex items-center gap-3 group shrink-0"
+            className="flex items-center gap-2.5 group shrink-0"
           >
-            <div className="w-10 h-10 lg:w-11 lg:h-11 bg-gradient-to-br from-emerald-500 to-emerald-700 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-900/40 group-hover:scale-105 transition-transform">
-              <Briefcase className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
-            </div>
-            <div className="text-left hidden sm:block">
-              <span className="block text-lg lg:text-xl font-black tracking-tight text-white">
-                Biz<span className="text-emerald-400">Exchange</span>
-              </span>
-              <span className="block text-[10px] text-zinc-400 uppercase tracking-widest font-semibold">
-                Verified Businesses For Sale
-              </span>
-            </div>
+            <img
+              src={SITE.logo}
+              alt={`${SITE.name} logo`}
+              className="h-9 lg:h-11 w-auto object-contain"
+            />
           </button>
 
           {/* Search (desktop) */}
@@ -147,22 +140,6 @@ export function Navbar() {
                 {item.label}
               </Button>
             ))}
-
-            {currentUser.role === 'seller' && (
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => go('seller-dashboard')}
-                className={cn(
-                  'text-sm font-medium hover:text-emerald-400 hover:bg-zinc-900',
-                  currentView === 'seller-dashboard'
-                    ? 'text-emerald-400 bg-zinc-900'
-                    : 'text-zinc-300',
-                )}
-              >
-                <Store className="w-4 h-4 mr-1.5" /> Seller
-              </Button>
-            )}
 
             {currentUser.role === 'admin' && (
               <Button
@@ -233,7 +210,7 @@ export function Navbar() {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator className="bg-zinc-800" />
                   <div className="px-2 py-1.5 text-[10px] uppercase tracking-wider text-zinc-500 font-bold">
-                    Switch Role (Demo)
+                    Switch Role
                   </div>
                   <DropdownMenuItem
                     onClick={() => switchRole('user')}
@@ -243,18 +220,11 @@ export function Navbar() {
                     Buyer / User
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                    onClick={() => switchRole('seller')}
-                    className="text-zinc-300 hover:bg-zinc-800 hover:text-emerald-400 cursor-pointer"
-                  >
-                    <Store className="w-3.5 h-3.5 mr-2 text-emerald-500" />
-                    Seller / Vendor
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    onClick={() => switchRole('admin')}
+                    onClick={() => go('admin-dashboard')}
                     className="text-zinc-300 hover:bg-zinc-800 hover:text-emerald-400 cursor-pointer"
                   >
                     <LayoutDashboard className="w-3.5 h-3.5 mr-2 text-emerald-500" />
-                    Admin
+                    Admin Login
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -318,12 +288,6 @@ export function Navbar() {
               </button>
             ))}
             <button
-              onClick={() => go('seller-dashboard')}
-              className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-300 hover:bg-zinc-900"
-            >
-              Seller Dashboard
-            </button>
-            <button
               onClick={() => go('admin-dashboard')}
               className="block w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-zinc-300 hover:bg-zinc-900"
             >
@@ -333,7 +297,7 @@ export function Navbar() {
 
           <div className="pt-4 border-t border-zinc-800">
             <p className="text-xs text-zinc-500 mb-2">Switch role:</p>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 gap-2">
               <Button
                 size="sm"
                 variant={currentUser.role === 'user' ? 'default' : 'outline'}
@@ -351,33 +315,13 @@ export function Navbar() {
               </Button>
               <Button
                 size="sm"
-                variant={currentUser.role === 'seller' ? 'default' : 'outline'}
                 onClick={() => {
-                  switchRole('seller');
+                  go('admin-dashboard');
                   setMobileOpen(false);
                 }}
-                className={
-                  currentUser.role === 'seller'
-                    ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
-                    : 'bg-transparent border-zinc-700 text-zinc-300'
-                }
+                className="bg-transparent border-zinc-700 text-zinc-300 hover:bg-zinc-900"
               >
-                Seller
-              </Button>
-              <Button
-                size="sm"
-                variant={currentUser.role === 'admin' ? 'default' : 'outline'}
-                onClick={() => {
-                  switchRole('admin');
-                  setMobileOpen(false);
-                }}
-                className={
-                  currentUser.role === 'admin'
-                    ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
-                    : 'bg-transparent border-zinc-700 text-zinc-300'
-                }
-              >
-                Admin
+                Admin Login
               </Button>
             </div>
           </div>

@@ -292,7 +292,7 @@ export function CheckoutView() {
               <div className="flex items-start gap-2 text-[11px] text-zinc-500 pt-2">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 shrink-0 mt-0.5" />
                 <p>
-                  By proceeding, you agree to BizExchange&apos;s escrow terms. Funds
+                  By proceeding, you agree to MakeThisDeal.biz&apos;s escrow terms. Funds
                   are released only after you confirm successful business transfer.
                 </p>
               </div>

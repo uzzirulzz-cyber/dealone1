@@ -110,3 +110,53 @@ Stage Summary:
 - ✅ Clean single-commit history (no auto-commit noise, no leaked credentials)
 - ✅ All source code, Prisma schema, seed/verify scripts, README, and 6 real site screenshots are public
 - ⚠️ The PAT was sent in plain text over chat — recommend the user revoke this token at https://github.com/settings/tokens and generate a new one for any future use
+
+---
+Task ID: business-only-blog-seo
+Agent: Super Z (main agent)
+Task: Trim to only the 6 user-provided businesses, add SEO boost, write AI blog about the website & features, inject Google AdSense meta tag
+
+Work Log:
+- Deleted 8 mock business listings (biz-1 through biz-8) from src/lib/businessData.ts, keeping only the 6 real fetched businesses (biz-9 through biz-14)
+- Updated initialOrders and initialOffers to reference real businesses (NEXTRADE, PlayBeat Digital, PropertyAtlas) instead of deleted mock businesses
+- Bumped localStorage version (v3 → v4) to clear stale state
+- Re-seeded Neon database: 6 businesses, 3 users, 2 offers, 1 order, 1 admin settings row
+- Created src/lib/seo.ts with centralized SITE config + per-business SeoBusinessEntry objects (slug, blogSlug, blogTitle, blogExcerpt, blogKeywords, seoH1, seoMetaDescription, keyMetrics, features, whyAcquire, dueDiligence)
+- Injected Google AdSense meta tag (ca-pub-8143075550797983) into src/app/layout.tsx via Next.js metadata.other + a literal <meta> tag in <head>
+- Built comprehensive metadata in layout.tsx: title template, description, keywords, Open Graph (image, locale, site name), Twitter Cards (summary_large_image), robots directives, theme color
+- Added JSON-LD structured data for Organization + WebSite (with SearchAction) injected into <head> as <script type="application/ld+json">
+- Created src/app/sitemap.ts — programmatic sitemap with static routes + per-business routes + per-blog-post routes + features article route
+- Created src/app/robots.ts — programmatic robots.txt with bot-specific rules (Googlebot, Googlebot-Image, Bingbot, *) + sitemap reference
+- Deleted conflicting public/robots.txt to let app/robots.ts take over
+- Built 3 new view components:
+  - BlogIndexView: searchable article directory with featured post (PlayBeat TV) + 6 article cards + CTA
+  - BlogPostView: long-form article template with 10 sections (Hero, Screenshot, Intro, Key Metrics, What Is, Platform Features, Why Acquire, Due Diligence Checklist, Pricing Analysis, How to Acquire, FAQ, Tags, Related Articles)
+  - FeaturesArticleView: 12-minute platform overview article with 6 feature blocks + buyer/seller flows + tech stack
+- Added 'blog-index', 'blog-post', 'blog-features' to ViewName type
+- Added selectedBlogSlug + openBlogPost action to Zustand store
+- Wired new views into src/app/page.tsx orchestrator
+- Updated Navbar with Blog nav item (active state covers blog-post and blog-features too)
+- Updated Footer with new "Blog & Resources" column (All Articles, Platform Features, Acquisition Guides, Due Diligence Tips)
+- Added 3-card blog teaser section to HomeView between "Why Us" and "CTA" sections
+- Bumped footer grid from 5 columns to 6 columns to fit the new Blog section
+- Lint passes clean, dev server log shows no errors after Card import fix
+- Browser-verified:
+  - Home page renders with Blog nav button + 6 featured business cards + blog teaser section
+  - Marketplace shows "All Listings (6)" — no mock businesses
+  - Blog index renders featured post + 6 article cards
+  - Blog post (NEXTRADE) renders all 10 sections including FAQ + Related Articles
+  - AdSense meta tag present in DOM: "ca-pub-8143075550797983"
+  - JSON-LD present: Organization + WebSite
+  - /sitemap.xml returns valid XML with all routes
+  - /robots.txt returns valid bot rules
+- Gitignored /upload/ folder (user-pasted chat attachments shouldn't be committed)
+- Committed as single squashed commit (7150e59) and pushed to https://github.com/uzzirulzz-cyber/dealone1
+
+Stage Summary:
+- Marketplace now contains ONLY the 6 user-provided businesses with their real prices ($750, $850 ×3, $2,250, $2,100)
+- AdSense meta tag (ca-pub-8143075550797983) is in <head> on every page
+- SEO infrastructure live: sitemap.xml, robots.txt, JSON-LD, OG/Twitter cards, per-business keywords
+- AI blog live with 7 long-form articles: 6 per-business posts + 1 platform features article
+- Each blog post contains: hero, screenshot, key metrics, 6 features, 5 reasons to acquire, 5-8 due diligence items, pricing analysis, 5-step acquisition flow, 4 FAQs, 8 SEO tags, 3 related posts
+- All cross-linked: blog posts link to listings, listings link to blog, footer links to blog, navbar links to blog, home page has blog teaser
+- Live on GitHub: https://github.com/uzzirulzz-cyber/dealone1/commit/7150e59

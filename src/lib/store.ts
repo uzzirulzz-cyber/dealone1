@@ -30,10 +30,15 @@ interface MarketplaceState {
   openBusiness: (id: string) => void;
   openBlogPost: (slug: string) => void;
 
+  // admin auth
+  isAdminAuthenticated: boolean;
+  adminLogin: (email: string, password: string) => boolean;
+  adminLogout: () => void;
+
   // user
   currentUser: User;
   users: User[];
-  switchRole: (role: 'user' | 'seller' | 'admin') => void;
+  switchRole: (role: 'user' | 'admin') => void;
 
   // data
   businesses: BusinessListing[];
@@ -85,13 +90,37 @@ export const useMarketplace = create<MarketplaceState>()(
 
       currentUser: initialUsers[0],
       users: initialUsers,
+      isAdminAuthenticated: false,
+      adminLogin: (email, password) => {
+        // Demo credentials — in production this would call a hashed server-side check
+        const ADMIN_EMAIL = 'trade@trade.com';
+        const ADMIN_PASSWORD = 'trade123';
+        if (email.trim().toLowerCase() === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+          const adminUser = get().users.find((u) => u.role === 'admin');
+          if (adminUser) {
+            set({ currentUser: adminUser, isAdminAuthenticated: true, currentView: 'admin-dashboard' });
+            return true;
+          }
+        }
+        return false;
+      },
+      adminLogout: () => {
+        const buyer = get().users.find((u) => u.role === 'user');
+        set({
+          currentUser: buyer || get().currentUser,
+          isAdminAuthenticated: false,
+          currentView: 'home',
+        });
+      },
       switchRole: (role) => {
         const target = get().users.find((u) => u.role === role);
         if (target) {
           set({ currentUser: target });
           if (role === 'user') set({ currentView: 'home' });
-          else if (role === 'seller') set({ currentView: 'seller-dashboard' });
-          else if (role === 'admin') set({ currentView: 'admin-dashboard' });
+          else if (role === 'admin') {
+            // Admin requires login — go to admin view (login gate will render if not authed)
+            set({ currentView: 'admin-dashboard' });
+          }
         }
       },
 
@@ -250,9 +279,10 @@ export const useMarketplace = create<MarketplaceState>()(
         })),
     }),
     {
-      name: 'bizexchange-storage-v4',
+      name: 'makethisdeal-storage-v1',
       partialize: (s) => ({
         currentUser: s.currentUser,
+        isAdminAuthenticated: s.isAdminAuthenticated,
         businesses: s.businesses,
         cart: s.cart,
         wishlist: s.wishlist,

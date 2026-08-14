@@ -25,34 +25,27 @@ import { BusinessCard } from '@/components/marketplace/BusinessCard';
 import { OfferModal } from '@/components/marketplace/OfferModal';
 import { useMarketplace } from '@/lib/store';
 import { formatCurrency } from '@/lib/format';
-import { SEO_BUSINESSES } from '@/lib/seo';
+import { SEO_BUSINESSES, SITE } from '@/lib/seo';
 import type { BusinessListing } from '@/lib/types';
-
-const stats = [
-  { value: '$48M+', label: 'Total Deal Volume', icon: DollarSign },
-  { value: '420+', label: 'Businesses Sold', icon: Briefcase },
-  { value: '100%', label: 'Escrow Protected', icon: ShieldCheck },
-  { value: '14 days', label: 'Avg. Deal Time', icon: Zap },
-];
 
 const trustFeatures = [
   {
     icon: ShieldCheck,
-    title: 'Verified Financials',
+    title: 'Verified Listings',
     description:
-      'Every listing undergoes financial verification — P&L statements, bank deposits, and analytics access are reviewed before approval.',
+      'Every listing undergoes financial verification — P&L statements, bank deposits, and analytics access are reviewed before approval. We reject listings with unverifiable revenue.',
   },
   {
     icon: TrendingUp,
     title: 'Escrow Protection',
     description:
-      'Funds are held securely in escrow through the entire due diligence period. Released only when both parties confirm the transfer.',
+      'Funds are held securely in escrow through the entire due diligence period. Released only when you confirm the business transfer is complete.',
   },
   {
     icon: BadgeCheck,
-    title: 'Hand-picked Sellers',
+    title: 'Curated Catalog',
     description:
-      'Sellers are vetted for legitimacy and operational history. We reject listings with unverifiable revenue or shallow operational records.',
+      'We do not accept seller self-submissions. Every business in our catalog is hand-selected by our team from vetted sources — quality over quantity.',
   },
   {
     icon: LineChart,
@@ -88,20 +81,21 @@ export function HomeView() {
           <div className="text-center max-w-4xl mx-auto space-y-7">
             <Badge className="inline-flex items-center gap-1.5 bg-emerald-900/30 border-emerald-700/40 text-emerald-300 px-4 py-1.5 text-xs font-bold uppercase tracking-wider">
               <Zap className="w-3.5 h-3.5" />
-              Verified Businesses Marketplace · Escrow Protected
+              Curated Acquisition Storefront · Escrow Protected
             </Badge>
 
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-white leading-[1.05]">
-              Buy & Sell Profitable{' '}
+              Acquire Profitable{' '}
               <span className="bg-gradient-to-r from-emerald-400 via-emerald-300 to-teal-400 bg-clip-text text-transparent">
                 Online Businesses
               </span>
             </h1>
 
             <p className="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-              The trusted marketplace for acquiring SaaS platforms, e-commerce stores,
-              agencies, content assets, and subscription businesses. Every listing is
-              financially verified and every transaction is escrow-protected.
+              A curated storefront for acquiring verified SaaS platforms, crypto trading
+              terminals, digital product marketplaces, AI CRMs, and luxury real estate
+              platforms. Every listing is financially verified and every transaction is
+              escrow-protected.
             </p>
 
             {/* Search */}
@@ -127,21 +121,41 @@ export function HomeView() {
               </div>
             </form>
 
-            {/* Quick stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 pt-12 max-w-4xl mx-auto">
-              {stats.map((s) => (
-                <div key={s.label} className="text-center">
-                  <div className="flex items-center justify-center mb-2">
-                    <s.icon className="w-5 h-5 text-emerald-500" />
-                  </div>
-                  <div className="text-2xl sm:text-3xl font-black text-white">
-                    {s.value}
-                  </div>
-                  <div className="text-[10px] sm:text-xs text-zinc-500 uppercase tracking-wider mt-1">
-                    {s.label}
-                  </div>
+            {/* Real catalog stats (verified, not inflated) */}
+            <div className="grid grid-cols-3 gap-5 pt-12 max-w-3xl mx-auto">
+              <div className="text-center">
+                <div className="flex items-center justify-center mb-2">
+                  <Briefcase className="w-5 h-5 text-emerald-500" />
                 </div>
-              ))}
+                <div className="text-2xl sm:text-3xl font-black text-white">
+                  {businesses.length}
+                </div>
+                <div className="text-[10px] sm:text-xs text-zinc-500 uppercase tracking-wider mt-1">
+                  Verified Listings
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="flex items-center justify-center mb-2">
+                  <ShieldCheck className="w-5 h-5 text-emerald-500" />
+                </div>
+                <div className="text-2xl sm:text-3xl font-black text-white">
+                  Escrow
+                </div>
+                <div className="text-[10px] sm:text-xs text-zinc-500 uppercase tracking-wider mt-1">
+                  Protected Checkout
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="flex items-center justify-center mb-2">
+                  <DollarSign className="w-5 h-5 text-emerald-500" />
+                </div>
+                <div className="text-2xl sm:text-3xl font-black text-white">
+                  {formatCurrency(Math.min(...businesses.map((b) => b.askingPrice)))}
+                </div>
+                <div className="text-[10px] sm:text-xs text-zinc-500 uppercase tracking-wider mt-1">
+                  Lowest Asking Price
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -238,11 +252,11 @@ export function HomeView() {
               <ShieldCheck className="w-3 h-3 mr-1" /> Trust & Safety
             </Badge>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
-              Why Founders Choose BizExchange
+              Why Buyers Choose {SITE.name}
             </h2>
             <p className="text-sm text-zinc-400 mt-3">
-              We obsess over deal quality. Every business is screened, every
-              financial verified, every transaction protected.
+              We obsess over deal quality. Every business is screened, every financial
+              verified, every transaction protected.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -273,7 +287,7 @@ export function HomeView() {
               Deep-Dive Analyses of Every Listing
             </h2>
             <p className="text-sm text-zinc-400 mt-2 max-w-2xl">
-              Each business on BizExchange comes with a long-form article breaking down the
+              Each business on {SITE.name} comes with a long-form article breaking down the
               platform, the verified metrics, the reasons to acquire, and a due diligence
               checklist — written for serious buyers.
             </p>
@@ -329,29 +343,30 @@ export function HomeView() {
           <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-600/10 blur-[100px] rounded-full pointer-events-none" />
           <div className="relative z-10 max-w-2xl space-y-5">
             <Badge className="bg-emerald-600 text-white border-emerald-500">
-              <Globe className="w-3 h-3 mr-1" /> Sell Your Business
+              <Globe className="w-3 h-3 mr-1" /> Start Acquiring
             </Badge>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
-              Ready to exit your business? List in 10 minutes.
+              Ready to acquire your next online business?
             </h2>
             <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
-              Reach 50,000+ qualified buyers actively searching for profitable online
-              businesses. Pay only 8% commission when your deal closes — no upfront fees.
+              Browse {businesses.length} verified business listings with full financial
+              metrics, real production screenshots, and escrow-protected checkout. Every
+              transaction is held securely until you confirm the transfer is complete.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 pt-2">
               <Button
-                onClick={() => setView('seller-dashboard')}
+                onClick={() => setView('marketplace')}
                 className="bg-emerald-600 hover:bg-emerald-500 text-white h-12 px-7"
               >
-                List Your Business
+                Browse Marketplace
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
               <Button
-                onClick={() => setView('marketplace')}
+                onClick={() => setView('blog-index')}
                 variant="outline"
                 className="bg-transparent border-zinc-700 text-white hover:bg-zinc-800 h-12 px-7"
               >
-                Browse Marketplace
+                Read Acquisition Guides
               </Button>
             </div>
           </div>

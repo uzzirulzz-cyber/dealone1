@@ -317,7 +317,7 @@ export function BusinessDetailView() {
                   <div className="mt-5 pt-5 border-t border-zinc-800 flex items-start gap-2 text-xs text-zinc-500">
                     <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                     <p>
-                      All financial metrics are verified by BizExchange through
+                      All financial metrics are verified by MakeThisDeal.biz through
                       bank statements, payment processor exports, and analytics
                       access. Full due diligence documentation is provided post-offer acceptance.
                     </p>

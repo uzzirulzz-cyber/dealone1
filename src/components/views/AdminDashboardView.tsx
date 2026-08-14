@@ -3,7 +3,6 @@
 import {
   LayoutDashboard,
   Users,
-  Store,
   DollarSign,
   TrendingUp,
   BadgeCheck,
@@ -11,6 +10,8 @@ import {
   CheckCircle2,
   ShieldCheck,
   Settings,
+  LogOut,
+  Store,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -21,6 +22,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useMarketplace } from '@/lib/store';
+import { SITE } from '@/lib/seo';
 import { formatCurrency, timeAgo } from '@/lib/format';
 import { toast } from 'sonner';
 
@@ -34,20 +36,19 @@ export function AdminDashboardView() {
     adminSettings,
     updateAdminSettings,
     deleteBusiness,
-    updateUserStatus,
     updateBusiness,
+    adminLogout,
   } = useMarketplace();
 
   const totalGMV = orders.reduce((s, o) => s + o.totalAmount, 0);
   const platformRevenue = Math.round(totalGMV * (adminSettings.commissionRate / 100));
   const pendingListings = businesses.filter((b) => b.status === 'pending');
-  const verifiedSellers = users.filter((u) => u.isVerifiedSeller).length;
 
   const stats = [
     { label: 'Total GMV', value: formatCurrency(totalGMV, { compact: true }), icon: DollarSign, accent: 'text-emerald-400' },
     { label: 'Platform Revenue', value: formatCurrency(platformRevenue, { compact: true }), icon: TrendingUp, accent: 'text-white' },
     { label: 'Total Listings', value: businesses.length.toString(), icon: Store, accent: 'text-white' },
-    { label: 'Active Users', value: users.length.toString(), icon: Users, accent: 'text-white' },
+    { label: 'Registered Users', value: users.length.toString(), icon: Users, accent: 'text-white' },
   ];
 
   return (
@@ -55,15 +56,30 @@ export function AdminDashboardView() {
       {/* Header */}
       <div className="bg-zinc-900/40 border-b border-zinc-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <Badge className="bg-emerald-900/30 border-emerald-700/40 text-emerald-300 mb-3">
-            <LayoutDashboard className="w-3 h-3 mr-1" /> Admin Dashboard
-          </Badge>
-          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-            Platform Overview
-          </h1>
-          <p className="text-sm text-zinc-400 mt-1">
-            Manage listings, users, and platform configuration.
-          </p>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <Badge className="bg-emerald-900/30 border-emerald-700/40 text-emerald-300 mb-3">
+                <LayoutDashboard className="w-3 h-3 mr-1" /> Admin Console
+              </Badge>
+              <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+                {SITE.name} · Platform Overview
+              </h1>
+              <p className="text-sm text-zinc-400 mt-1">
+                Signed in as <span className="text-emerald-400 font-semibold">{currentUser.email}</span> · Manage listings, users, and platform configuration.
+              </p>
+            </div>
+            <Button
+              onClick={() => {
+                adminLogout();
+                toast.success('Signed out of admin console');
+              }}
+              variant="outline"
+              className="bg-transparent border-zinc-700 text-zinc-200 hover:bg-zinc-900 hover:text-rose-400 h-11"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -251,18 +267,6 @@ export function AdminDashboardView() {
                     <p className="text-xs text-zinc-500 mt-1">{u.email}</p>
                     <p className="text-[10px] text-zinc-600 mt-0.5">Joined {timeAgo(u.createdAt)}</p>
                   </div>
-                  {u.role === 'seller' && (
-                    <div className="flex items-center gap-2">
-                      <Label className="text-xs text-zinc-400">Verified</Label>
-                      <Switch
-                        checked={!!u.isVerifiedSeller}
-                        onCheckedChange={(checked) => {
-                          updateUserStatus(u.id, checked);
-                          toast.success(checked ? 'Seller verified' : 'Seller unverified');
-                        }}
-                      />
-                    </div>
-                  )}
                 </div>
               </Card>
             ))}

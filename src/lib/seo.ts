@@ -5,19 +5,22 @@ import type { BusinessCategory, BusinessMonetization } from './types';
 // ============================================================
 
 export const SITE = {
-  name: 'BizExchange',
-  tagline: 'Buy & Sell Profitable Online Businesses',
+  name: 'MakeThisDeal.biz',
+  shortName: 'MakeThisDeal',
+  tagline: 'Acquire Profitable Online Businesses',
   description:
-    'BizExchange is the trusted marketplace for buying and selling profitable online businesses — verified SaaS platforms, crypto trading terminals, digital product marketplaces, CRMs, and luxury real estate platforms. Every listing is financially verified and every transaction is escrow-protected.',
-  url: 'https://bizexchange.vercel.app', // update to your production domain
+    'MakeThisDeal.biz is a curated storefront for acquiring profitable online businesses — verified SaaS platforms, crypto trading terminals, digital product marketplaces, CRMs, and luxury real estate platforms. Every listing is financially verified and every transaction is escrow-protected.',
+  url: 'https://makethisdeal.biz', // update to your production domain
   locale: 'en_US',
-  twitter: '@bizexchange',
-  author: 'BizExchange Editorial Team',
+  twitter: '@makethisdeal',
+  author: 'MakeThisDeal.biz Editorial Team',
   adsenseClient: 'ca-pub-8143075550797983',
+  logo: '/logo.png',
+  // Admin login credentials (demo — store securely in production via hashed env vars)
+  adminEmail: 'trade@trade.com',
+  adminPassword: 'trade123',
   keywords: [
     'buy a business',
-    'sell a business',
-    'business for sale',
     'acquire a startup',
     'online business marketplace',
     'SaaS for sale',
@@ -27,9 +30,11 @@ export const SITE = {
     'luxury real estate platform',
     'verified business listings',
     'escrow business acquisition',
-    'website flipping',
+    'website acquisition',
     'micro-acquisition',
-    ' indie acquisitions',
+    'indie acquisitions',
+    'make this deal',
+    'makethisdeal',
   ],
 };
 

@@ -425,8 +425,8 @@ export const initialOffers: Offer[] = [
 ];
 
 export const initialAdminSettings: AdminSettings = {
-  siteName: 'BizExchange',
-  logo: 'BizExchange',
+  siteName: 'MakeThisDeal.biz',
+  logo: 'MakeThisDeal.biz',
   currency: 'USD',
   taxRate: 5,
   commissionRate: 8,

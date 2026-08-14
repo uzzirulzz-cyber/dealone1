@@ -30,6 +30,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png",
+  },
   openGraph: {
     type: "website",
     locale: SITE.locale,
@@ -39,7 +43,7 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: [
       {
-        url: "/site-screenshots/playbeat.digital.png",
+        url: SITE.logo,
         width: 1200,
         height: 630,
         alt: `${SITE.name} — ${SITE.tagline}`,
@@ -52,7 +56,7 @@ export const metadata: Metadata = {
     creator: SITE.twitter,
     title: `${SITE.name} — ${SITE.tagline}`,
     description: SITE.description,
-    images: ["/site-screenshots/playbeat.digital.png"],
+    images: [SITE.logo],
   },
   robots: {
     index: true,
@@ -97,10 +101,10 @@ export default function RootLayout({
     "@type": "Organization",
     name: SITE.name,
     url: SITE.url,
-    logo: `${SITE.url}/logo.svg`,
+    logo: `${SITE.url}${SITE.logo}`,
     description: SITE.description,
     sameAs: [
-      "https://twitter.com/bizexchange",
+      "https://twitter.com/makethisdeal",
       "https://github.com/uzzirulzz-cyber/dealone1",
     ],
   };

@@ -8,9 +8,9 @@ import { HomeView } from '@/components/views/HomeView';
 import { MarketplaceView } from '@/components/views/MarketplaceView';
 import { BusinessDetailView } from '@/components/views/BusinessDetailView';
 import { CheckoutView } from '@/components/views/CheckoutView';
-import { SellerDashboardView } from '@/components/views/SellerDashboardView';
 import { UserDashboardView } from '@/components/views/UserDashboardView';
 import { AdminDashboardView } from '@/components/views/AdminDashboardView';
+import { AdminLoginView } from '@/components/views/AdminLoginView';
 import { BlogIndexView } from '@/components/views/BlogIndexView';
 import { BlogPostView } from '@/components/views/BlogPostView';
 import { FeaturesArticleView } from '@/components/views/FeaturesArticleView';
@@ -19,7 +19,7 @@ import { getBlogPostBySlug } from '@/lib/seo';
 import { Toaster } from 'sonner';
 
 export default function Home() {
-  const { currentView, setView, openBlogPost, selectedBlogSlug } = useMarketplace();
+  const { currentView, setView, openBlogPost, selectedBlogSlug, isAdminAuthenticated } = useMarketplace();
 
   // Scroll to top on view change
   useEffect(() => {
@@ -40,9 +40,11 @@ export default function Home() {
         return <CheckoutView />;
       case 'user-dashboard':
         return <UserDashboardView />;
-      case 'seller-dashboard':
-        return <SellerDashboardView />;
       case 'admin-dashboard':
+        // Auth gate — if not authenticated, show login form instead of dashboard
+        if (!isAdminAuthenticated) {
+          return <AdminLoginView />;
+        }
         return <AdminDashboardView />;
       case 'blog-index':
         return (
@@ -87,11 +89,15 @@ export default function Home() {
     }
   };
 
-  // Hide footer on checkout and article pages for focus
+  // Hide navbar/footer on admin login for a focused auth screen
+  const isAdminLogin = currentView === 'admin-dashboard' && !isAdminAuthenticated;
+
+  // Hide footer on checkout, article, and admin login pages for focus
   const hideFooter =
     currentView === 'checkout' ||
     currentView === 'business-detail' ||
-    currentView === 'blog-post';
+    currentView === 'blog-post' ||
+    isAdminLogin;
 
   return (
     <div className="min-h-screen flex flex-col bg-zinc-950">
@@ -106,8 +112,8 @@ export default function Home() {
           },
         }}
       />
-      <Navbar />
-      <CartDrawer />
+      {!isAdminLogin && <Navbar />}
+      {!isAdminLogin && <CartDrawer />}
       <main className="flex-1">{renderView()}</main>
       {!hideFooter && <Footer />}
     </div>
