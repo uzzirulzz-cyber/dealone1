@@ -26,6 +26,7 @@ import { OfferModal } from '@/components/marketplace/OfferModal';
 import { useMarketplace } from '@/lib/store';
 import { formatCurrency } from '@/lib/format';
 import { SEO_BUSINESSES, SITE } from '@/lib/seo';
+import { AdSlot } from '@/components/marketplace/AdSlot';
 import type { BusinessListing } from '@/lib/types';
 
 const trustFeatures = [
@@ -199,6 +200,9 @@ export function HomeView() {
             />
           ))}
         </div>
+
+        {/* AdSense ad unit — after featured listings */}
+        <AdSlot slotKey="homeFeatured" format="horizontal" />
       </section>
 
       {/* Categories strip — REAL counts computed from the actual businesses array */}
@@ -253,6 +257,9 @@ export function HomeView() {
             ));
           })()}
         </div>
+
+        {/* AdSense ad unit — after categories strip */}
+        <AdSlot slotKey="homeCategories" format="horizontal" className="mt-12" />
       </section>
 
       {/* Why choose us */}

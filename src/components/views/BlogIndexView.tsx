@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { SEO_BUSINESSES, SITE } from '@/lib/seo';
+import { AdSlot } from '@/components/marketplace/AdSlot';
 import { useMarketplace } from '@/lib/store';
 import { formatCurrency } from '@/lib/format';
 import { useState } from 'react';
@@ -198,6 +199,9 @@ export function BlogIndexView({ onReadPost }: BlogIndexViewProps) {
               ))}
             </div>
           )}
+
+          {/* AdSense ad unit — between blog cards and CTA */}
+          <AdSlot slotKey="blogIndex" format="horizontal" />
         </section>
 
         {/* CTA */}

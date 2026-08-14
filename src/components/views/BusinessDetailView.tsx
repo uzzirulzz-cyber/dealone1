@@ -29,6 +29,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { OfferModal } from '@/components/marketplace/OfferModal';
+import { AdSlot } from '@/components/marketplace/AdSlot';
 import { useMarketplace } from '@/lib/store';
 import { formatCurrency, formatNumber, timeAgo } from '@/lib/format';
 import { toast } from 'sonner';
@@ -524,6 +525,9 @@ export function BusinessDetailView() {
             </Card>
           </aside>
         </div>
+
+        {/* AdSense ad unit — bottom of business detail page */}
+        <AdSlot slotKey="businessDetail" format="horizontal" />
       </div>
 
       <OfferModal

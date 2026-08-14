@@ -138,6 +138,43 @@ The app supports 3 demo roles (switchable via the avatar dropdown in the top-rig
 - The provided `.env.example` contains only placeholder values
 - All passwords and connection strings in this README are examples
 
+## 💰 Google AdSense Setup
+
+This project includes full AdSense integration — the verification meta tag, the `adsbygoogle.js` script, and 7 manual ad placements across the site.
+
+### What's already wired
+- `<meta name="google-adsense-account" content="ca-pub-8143075550797983">` in `<head>` (verification)
+- `adsbygoogle.js` script loaded via `next/script` with `afterInteractive` strategy
+- 7 ad slots placed across views:
+  - `homeFeatured` — after featured listings on home page
+  - `homeCategories` — after the categories strip on home page
+  - `marketplaceList` — below the marketplace listing grid
+  - `blogIndex` — between blog cards and CTA on blog index
+  - `blogPostMid` — mid-article in blog posts (before pricing analysis)
+  - `blogPostEnd` — end of blog posts (before tags)
+  - `businessDetail` — bottom of business detail page
+
+### To activate ads
+1. Go to **https://www.google.com/adsense** and sign in
+2. Add your production domain (must be deployed — AdSense won't verify `localhost`)
+3. Wait for Google to crawl and approve your site (1–14 days)
+4. In the AdSense dashboard, create 7 ad units: **My ads → Ad units → New ad unit**
+5. Copy each ad unit's `data-ad-slot` ID (the 10-digit number)
+6. Edit `src/lib/seo.ts` → replace the placeholder slot IDs in `SITE.adsenseSlots`:
+   ```typescript
+   adsenseSlots: {
+     homeFeatured: '1111111111',     // ← replace with real slot ID
+     homeCategories: '2222222222',   // ← replace with real slot ID
+     // ... etc
+   }
+   ```
+7. Deploy — ads will start serving once Google approves
+
+### Notes
+- Ads will appear as empty gray boxes in development (slot IDs are placeholders)
+- The `AdSlot` component fails silently if adsbygoogle.js hasn't loaded — the page still renders fine
+- AdSense auto-ads are NOT enabled (we use manual placements for control over where ads appear)
+
 ## 📝 License
 
 MIT — for demonstration purposes.

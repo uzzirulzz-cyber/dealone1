@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { SITE } from "@/lib/seo";
@@ -128,6 +129,15 @@ export default function RootLayout({
         <meta
           name="google-adsense-account"
           content={SITE.adsenseClient}
+        />
+        {/* Google AdSense script — loads adsbygoogle.js with our publisher ID.
+            Uses afterInteractive strategy so it doesn't block page render. */}
+        <Script
+          id="adsbygoogle-init"
+          strategy="afterInteractive"
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${SITE.adsenseClient}`}
+          crossOrigin="anonymous"
         />
         {/* JSON-LD structured data for SEO */}
         <script

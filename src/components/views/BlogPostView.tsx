@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 import { SEO_BUSINESSES, SITE, type SeoBusinessEntry } from '@/lib/seo';
+import { AdSlot } from '@/components/marketplace/AdSlot';
 import { useMarketplace } from '@/lib/store';
 import { formatCurrency } from '@/lib/format';
 import { toast } from 'sonner';
@@ -267,6 +268,9 @@ export function BlogPostView({ post, onBack, onReadPost }: BlogPostViewProps) {
           </Card>
         </section>
 
+        {/* AdSense ad unit — mid-article */}
+        <AdSlot slotKey="blogPostMid" format="horizontal" />
+
         {/* Pricing analysis */}
         <section className="space-y-4">
           <h2 className="text-2xl font-black text-gray-900">
@@ -394,6 +398,9 @@ export function BlogPostView({ post, onBack, onReadPost }: BlogPostViewProps) {
             </div>
           </div>
         </section>
+
+        {/* AdSense ad unit — end of article */}
+        <AdSlot slotKey="blogPostEnd" format="horizontal" />
 
         {/* Tags */}
         <section className="pt-6 border-t border-gray-200">

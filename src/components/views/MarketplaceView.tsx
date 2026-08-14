@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { BusinessCard } from '@/components/marketplace/BusinessCard';
 import { OfferModal } from '@/components/marketplace/OfferModal';
+import { AdSlot } from '@/components/marketplace/AdSlot';
 import { useMarketplace } from '@/lib/store';
 import { formatCurrency } from '@/lib/format';
 import type { BusinessListing, BusinessCategory } from '@/lib/types';
@@ -311,6 +312,9 @@ export function MarketplaceView() {
                 ))}
               </div>
             )}
+
+            {/* AdSense ad unit — below marketplace listings */}
+            <AdSlot slotKey="marketplaceList" format="horizontal" className="mt-10" />
           </div>
         </div>
       </div>

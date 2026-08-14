@@ -15,6 +15,18 @@ export const SITE = {
   twitter: '@makethisdeal',
   author: 'MakeThisDeal.biz Editorial Team',
   adsenseClient: 'ca-pub-8143075550797983',
+  // AdSense ad slot IDs — replace these with real slot IDs from your AdSense dashboard
+  // https://www.google.com/adsense → My ads → Ad units → Get code → data-ad-slot
+  adsenseSlots: {
+    homeFeatured: '1111111111',     // After featured listings on home
+    homeCategories: '2222222222',   // After categories strip on home
+    marketplaceList: '3333333333',  // In marketplace listing grid
+    blogIndex: '4444444444',        // Between blog cards
+    blogPostMid: '5555555555',      // Mid-article in blog posts
+    blogPostEnd: '6666666666',      // End of blog posts
+    businessDetail: '777777777',    // On business detail page
+    sidebar: '8888888888',          // Generic sidebar ad
+  },
   logo: '/logo.png',
   // Contact — WhatsApp business number (international format, no + or spaces)
   whatsappNumber: '18005551234', // replace with your real business WhatsApp number
