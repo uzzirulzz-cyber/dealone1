@@ -1,6 +1,6 @@
 'use client';
 
-import { ShieldCheck, TrendingUp, Mail, Twitter, Linkedin, Github } from 'lucide-react';
+import { ShieldCheck, TrendingUp, Mail, Twitter, Linkedin, Github, MessageCircle } from 'lucide-react';
 import { useMarketplace } from '@/lib/store';
 import { SITE } from '@/lib/seo';
 import type { ViewName } from '@/lib/types';
@@ -9,6 +9,10 @@ export function Footer() {
   const { setView, businesses } = useMarketplace();
 
   const go = (view: ViewName) => setView(view);
+
+  const waLink = `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(
+    `Hi ${SITE.name} team, I'd like to ask about your listings.`,
+  )}`;
 
   return (
     <footer className="mt-auto bg-[#0B1B3A] border-t border-[#1d3a6e] text-zinc-400">
@@ -120,9 +124,25 @@ export function Footer() {
                 <ShieldCheck className="w-4 h-4 text-blue-500" />
                 Escrow Protection
               </li>
-              <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-blue-500" />
-                24/7 Support
+              <li>
+                <a
+                  href={waLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-[#25D366] transition"
+                >
+                  <MessageCircle className="w-4 h-4 text-[#25D366]" />
+                  WhatsApp: {SITE.whatsappDisplay}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${SITE.contactEmail}`}
+                  className="flex items-center gap-2 hover:text-blue-400 transition"
+                >
+                  <Mail className="w-4 h-4 text-blue-500" />
+                  {SITE.contactEmail}
+                </a>
               </li>
             </ul>
           </div>
@@ -136,7 +156,22 @@ export function Footer() {
             <button className="hover:text-blue-400 transition">Privacy</button>
             <button className="hover:text-blue-400 transition">Terms</button>
             <button className="hover:text-blue-400 transition">Escrow Policy</button>
-            <button className="hover:text-blue-400 transition">Contact</button>
+            <a
+              href={waLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 hover:text-[#25D366] transition"
+            >
+              <MessageCircle className="w-3.5 h-3.5" />
+              WhatsApp
+            </a>
+            <a
+              href={`mailto:${SITE.contactEmail}`}
+              className="flex items-center gap-1.5 hover:text-blue-400 transition"
+            >
+              <Mail className="w-3.5 h-3.5" />
+              Email
+            </a>
           </div>
         </div>
       </div>

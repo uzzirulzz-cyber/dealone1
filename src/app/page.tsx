@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { Navbar } from '@/components/marketplace/Navbar';
 import { Footer } from '@/components/marketplace/Footer';
 import { CartDrawer } from '@/components/marketplace/CartDrawer';
+import { WhatsAppButton } from '@/components/marketplace/WhatsAppButton';
 import { HomeView } from '@/components/views/HomeView';
 import { MarketplaceView } from '@/components/views/MarketplaceView';
 import { BusinessDetailView } from '@/components/views/BusinessDetailView';
@@ -116,6 +117,7 @@ export default function Home() {
       {!isAdminLogin && <CartDrawer />}
       <main className="flex-1">{renderView()}</main>
       {!hideFooter && <Footer />}
+      {!isAdminLogin && <WhatsAppButton />}
     </div>
   );
 }

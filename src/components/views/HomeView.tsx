@@ -79,19 +79,19 @@ export function HomeView() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24 lg:pb-28">
           <div className="text-center max-w-4xl mx-auto space-y-7">
-            <Badge className="inline-flex items-center gap-1.5 bg-blue-900/30 border-blue-700/40 text-blue-300 px-4 py-1.5 text-xs font-bold uppercase tracking-wider">
+            <Badge className="inline-flex items-center gap-1.5 bg-blue-500/20 border-blue-400/40 text-blue-200 px-4 py-1.5 text-xs font-bold uppercase tracking-wider">
               <Zap className="w-3.5 h-3.5" />
               Curated Acquisition Storefront · Escrow Protected
             </Badge>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-gray-900 leading-[1.05]">
+            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-white leading-[1.05]">
               Acquire Profitable{' '}
-              <span className="bg-gradient-to-r from-blue-400 via-blue-300 to-teal-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-400 via-blue-300 to-teal-300 bg-clip-text text-transparent">
                 Online Businesses
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed">
               A curated storefront for acquiring verified SaaS platforms, crypto trading
               terminals, digital product marketplaces, AI CRMs, and luxury real estate
               platforms. Every listing is financially verified and every transaction is
@@ -100,20 +100,20 @@ export function HomeView() {
 
             {/* Search */}
             <form onSubmit={handleSearch} className="max-w-2xl mx-auto pt-2">
-              <div className="flex flex-col sm:flex-row gap-2 p-2 bg-white/80 backdrop-blur-md border border-gray-200 rounded-2xl shadow-2xl">
+              <div className="flex flex-col sm:flex-row gap-2 p-2 bg-white/10 backdrop-blur-md border border-blue-400/20 rounded-2xl shadow-2xl">
                 <div className="relative flex-1">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-300" />
                   <Input
                     type="text"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     placeholder="Search by niche, MRR range, category, or keyword..."
-                    className="w-full bg-transparent border-0 text-gray-900 placeholder:text-gray-500 pl-11 h-11 focus-visible:ring-0"
+                    className="w-full bg-transparent border-0 text-white placeholder:text-blue-200/60 pl-11 h-11 focus-visible:ring-0"
                   />
                 </div>
                 <Button
                   type="submit"
-                  className="bg-blue-600 hover:bg-blue-500 text-gray-900 h-11 px-7"
+                  className="bg-blue-600 hover:bg-blue-500 text-white h-11 px-7"
                 >
                   Explore Deals
                   <ArrowRight className="w-4 h-4 ml-1.5" />
@@ -122,37 +122,37 @@ export function HomeView() {
             </form>
 
             {/* Real catalog stats (verified, not inflated) */}
-            <div className="grid grid-cols-3 gap-5 pt-12 max-w-3xl mx-auto">
+            <div className="grid grid-cols-3 gap-5 pt-12 max-w-3xl mx-auto border-t border-blue-900/60">
               <div className="text-center">
                 <div className="flex items-center justify-center mb-2">
-                  <Briefcase className="w-5 h-5 text-blue-500" />
+                  <Briefcase className="w-5 h-5 text-blue-300" />
                 </div>
-                <div className="text-2xl sm:text-3xl font-black text-gray-900">
+                <div className="text-2xl sm:text-3xl font-black text-white">
                   {businesses.length}
                 </div>
-                <div className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-wider mt-1">
+                <div className="text-[10px] sm:text-xs text-blue-200 uppercase tracking-wider mt-1">
                   Verified Listings
                 </div>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center mb-2">
-                  <ShieldCheck className="w-5 h-5 text-blue-500" />
+                  <ShieldCheck className="w-5 h-5 text-blue-300" />
                 </div>
-                <div className="text-2xl sm:text-3xl font-black text-gray-900">
+                <div className="text-2xl sm:text-3xl font-black text-white">
                   Escrow
                 </div>
-                <div className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-wider mt-1">
+                <div className="text-[10px] sm:text-xs text-blue-200 uppercase tracking-wider mt-1">
                   Protected Checkout
                 </div>
               </div>
               <div className="text-center">
                 <div className="flex items-center justify-center mb-2">
-                  <DollarSign className="w-5 h-5 text-blue-500" />
+                  <DollarSign className="w-5 h-5 text-blue-300" />
                 </div>
-                <div className="text-2xl sm:text-3xl font-black text-gray-900">
+                <div className="text-2xl sm:text-3xl font-black text-white">
                   {formatCurrency(Math.min(...businesses.map((b) => b.askingPrice)))}
                 </div>
-                <div className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-wider mt-1">
+                <div className="text-[10px] sm:text-xs text-blue-200 uppercase tracking-wider mt-1">
                   Lowest Asking Price
                 </div>
               </div>
@@ -201,7 +201,7 @@ export function HomeView() {
         </div>
       </section>
 
-      {/* Categories strip */}
+      {/* Categories strip — REAL counts computed from the actual businesses array */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 lg:pb-24">
         <div className="flex items-end justify-between mb-8">
           <div>
@@ -214,33 +214,44 @@ export function HomeView() {
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {[
-            { name: 'E-Commerce', count: 24, image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=400' },
-            { name: 'SaaS', count: 18, image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400' },
-            { name: 'Content', count: 12, image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400' },
-            { name: 'Agency', count: 16, image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400' },
-            { name: 'Mobile Apps', count: 9, image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400' },
-            { name: 'Marketplace', count: 7, image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400' },
-          ].map((cat) => (
-            <button
-              key={cat.name}
-              onClick={() => setView('marketplace')}
-              className="group relative rounded-2xl overflow-hidden aspect-square bg-white border border-gray-200 hover:border-blue-700/60 transition"
-            >
-              <img
-                src={cat.image}
-                alt={cat.name}
-                className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B3A] via-[#102956]/40 to-transparent" />
-              <div className="absolute inset-0 p-4 flex flex-col justify-end text-left">
-                <div className="text-sm font-bold text-gray-900">{cat.name}</div>
-                <div className="text-[11px] text-blue-400 mt-0.5">
-                  {cat.count} listings
+          {(() => {
+            // Compute REAL category counts from the actual businesses array
+            // Only show categories that actually have listings (hide empty ones)
+            const categoryData: { name: string; count: number; image: string }[] = [
+              { name: 'E-Commerce', image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=400' },
+              { name: 'SaaS / Software', image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400' },
+              { name: 'Content & Media', image: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400' },
+              { name: 'Agency / Services', image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400' },
+              { name: 'Mobile Apps', image: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400' },
+              { name: 'Marketplace', image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=400' },
+            ]
+              .map((c) => ({
+                ...c,
+                count: businesses.filter((b) => b.category === c.name).length,
+              }))
+              .filter((c) => c.count > 0); // hide empty categories — no fake counts
+
+            return categoryData.map((cat) => (
+              <button
+                key={cat.name}
+                onClick={() => setView('marketplace')}
+                className="group relative rounded-2xl overflow-hidden aspect-square bg-white border border-gray-200 hover:border-blue-700/60 transition"
+              >
+                <img
+                  src={cat.image}
+                  alt={cat.name}
+                  className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1B3A] via-[#102956]/40 to-transparent" />
+                <div className="absolute inset-0 p-4 flex flex-col justify-end text-left">
+                  <div className="text-sm font-bold text-white">{cat.name}</div>
+                  <div className="text-[11px] text-blue-300 mt-0.5">
+                    {cat.count} {cat.count === 1 ? 'listing' : 'listings'}
+                  </div>
                 </div>
-              </div>
-            </button>
-          ))}
+              </button>
+            ));
+          })()}
         </div>
       </section>
 

@@ -192,3 +192,63 @@ Stage Summary:
 - ALL selling functionality removed: no seller role, no seller dashboard, no 'List Your Business', no 'Sell Your Business' CTA, no seller footer column
 - Trust feature explicitly states 'We do not accept seller self-submissions'
 - Live on GitHub: https://github.com/uzzirulzz-cyber/dealone1/commit/852d8e9
+
+---
+Task ID: revert-theme-navy-blue
+Agent: Super Z (main agent)
+Task: Revert visual theme to match https://makedeal-phi.vercel.app/ (original navy + blue) per user instruction "this theme do not change it"
+
+Work Log:
+- Fetched the Vercel deployment via z-ai page_reader to confirm the reference theme
+- Used agent-browser to capture computed CSS values from the live reference site:
+  - Header background: rgb(11, 27, 58) = #0B1B3A (dark navy)
+  - Hero background: linear-gradient(#0B1B3A, #102956, #0B1B3A)
+  - Primary button color: oklch(0.546 0.245 262.881) ≈ blue-600 (#2563EB)
+  - Secondary button color: oklch(0.488 0.243 264.376) ≈ indigo-600 (#4F46E5)
+  - "Make Offer" button: light blue background with indigo text
+  - Body: transparent (white) with dark text
+- Wrote /home/z/my-project/scripts/retheme.py to systematically convert the emerald/zinc theme back to navy/blue across all 18 component files
+- Three file categories handled differently:
+  - DARK files (Navbar, Footer, AdminLoginView): zinc-950 → #0B1B3A (navy), zinc-900 → #102956, emerald → blue. Text colors stay white/zinc (works on dark navy).
+  - HYBRID files (HomeView, BlogIndexView, BlogPostView, FeaturesArticleView): Hero section gets navy gradient (#0B1B3A → #102956 → #0B1B3A), rest of page gets light theme (white/gray-50).
+  - LIGHT files (everything else): zinc-950 → gray-50, zinc-900 → white, zinc-800 → gray-100, emerald → blue, text-white → text-gray-900, text-zinc-300/400/500 → text-gray-700/600/500
+- Manually fixed edge cases the script missed:
+  - Hero border-b: gray-200 → #1d3a6e (dark navy border for the navy hero section)
+  - Decorative grid pattern color: #10b981 (emerald) → #2563EB (blue)
+  - Image overlays: from-zinc-950/80 → from-[#0B1B3A]/80 (navy gradient on card images)
+  - CTA card text colors: text-gray-900 → text-white (the CTA card has dark navy gradient bg, so text must be light)
+  - CTA card paragraph: text-gray-600 → text-blue-100 (light blue tint for readability on navy)
+  - CTA card outline button: border-gray-300 text-gray-900 → border-blue-400/40 text-white hover:bg-blue-900/30
+  - BlogIndexView CTA + FeaturesArticleView CTA: same text color fix
+  - AdminLoginView decorative grid: #10b981 → #2563EB
+  - layout.tsx viewport themeColor: #10b981 → #2563EB
+  - Placeholder text colors: placeholder:text-blue-300 → placeholder:text-gray-400 (for light-theme inputs)
+- Bumped no storage version (kept makethisdeal-storage-v1 since functional state didn't change)
+- Lint passes clean, no runtime errors in dev log
+- Browser-verified:
+  - Header bg = #0B1B3A (navy, verified via getComputedStyle)
+  - Body bg = white
+  - Cards bg = white with gray borders
+  - Hero gradient = navy → slightly lighter navy → navy
+  - All emerald accents replaced with blue
+  - Marketplace renders all 6 businesses with real screenshots
+  - Admin login still works (trade@trade.com / trade123 → dashboard with Sign Out)
+  - Page title still = "MakeThisDeal.biz — Acquire Profitable Online Businesses"
+  - Logo (logo.png) still loads in navbar/footer/admin-login
+- Committed as single squashed commit (2ae570d) and pushed to https://github.com/uzzirulzz-cyber/dealone1
+
+PRESERVED (per earlier user instructions — none of these changed):
+- MakeThisDeal.biz brand name + user-provided logo (logo.png)
+- Only 6 user-provided businesses (no mock listings)
+- Real verified stats (6 listings, Escrow, $750 lowest asking price) — no fake $48M+/420+/14 days
+- Admin login gate (trade@trade.com / trade123)
+- NO selling functionality (no seller role, no List Your Business, no Sell Your Business CTA, no seller footer column)
+- Google AdSense meta tag (ca-pub-8143075550797983)
+- AI blog with 6 per-business articles + 1 features article
+- SEO infrastructure (sitemap.xml, robots.txt, JSON-LD, OG/Twitter cards, per-business keywords)
+- Neon PostgreSQL database (6 businesses, 3 users, 2 offers, 1 order, 1 admin settings row)
+
+Stage Summary:
+- Visual theme now matches the reference at https://makedeal-phi.vercel.app/ — dark navy header/footer/hero + blue accents + light gray body with white cards
+- All recent functional corrections preserved: rebrand to MakeThisDeal.biz, real stats only, admin login, no selling, 6 businesses only
+- Live on GitHub: https://github.com/uzzirulzz-cyber/dealone1/commit/2ae570d

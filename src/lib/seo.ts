@@ -16,6 +16,10 @@ export const SITE = {
   author: 'MakeThisDeal.biz Editorial Team',
   adsenseClient: 'ca-pub-8143075550797983',
   logo: '/logo.png',
+  // Contact — WhatsApp business number (international format, no + or spaces)
+  whatsappNumber: '18005551234', // replace with your real business WhatsApp number
+  whatsappDisplay: '+1 (800) 555-1234',
+  contactEmail: 'hello@makethisdeal.biz',
   // Admin login credentials (demo — store securely in production via hashed env vars)
   adminEmail: 'trade@trade.com',
   adminPassword: 'trade123',
