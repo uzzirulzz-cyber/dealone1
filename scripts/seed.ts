@@ -67,6 +67,10 @@ const userIdMap = new Map<string, string>();
 const businessIdMap = new Map<string, string>();
 
 async function seed() {
+  if (process.env.NODE_ENV === 'production' || process.env.VERCEL_ENV === 'production' ||
+      process.env.CONFIRM_DEMO_DATABASE_RESET !== 'YES_RESET_DEMO_DATABASE') {
+    throw new Error('Demo seed blocked: requires explicit confirmation on an isolated non-production database.');
+  }
   console.log('🌱 Seeding Neon database...\n');
 
   // 0. Clean slate — delete in dependency order
